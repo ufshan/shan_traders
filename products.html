@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Products — Shan Traders</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', system-ui, sans-serif; }
+    .category-card {
+      @apply bg-white p-6 rounded-2xl shadow-lg border hover:shadow-xl transition-all hover:-translate-y-1 cursor-pointer;
+    }
+    .category-card.active {
+      @apply border-orange-500 ring-2 ring-orange-200;
+    }
+    .brand-card {
+      @apply bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-all;
+    }
+    .product-modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.5);
+      backdrop-filter: blur(5px);
+    }
+    .modal-content {
+      background: white;
+      margin: 5% auto;
+      padding: 0;
+      width: 90%;
+      max-width: 800px;
+      border-radius: 24px;
+      max-height: 85vh;
+      overflow-y: auto;
+    }
+    .product-image {
+      aspect-ratio: 1/1;
+      object-fit: cover;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+    .brand-logo {
+      width: 60px;
+      height: 60px;
+      object-fit: contain;
+      background: #f3f4f6;
+      border-radius: 12px;
+      padding: 8px;
+    }
+    /* Tab navigation */
+    .tab-button {
+      @apply px-6 py-3 font-semibold text-gray-600 hover:text-orange-700 border-b-2 border-transparent transition-all;
+    }
+    .tab-button.active {
+      @apply text-orange-700 border-orange-700;
+    }
+  </style>
+</head>
+<body class="bg-gray-50">
+
+<!-- Navigation -->
+<nav class="bg-white/80 backdrop-blur-md fixed w-full z-40 top-0 start-0 border-b border-gray-200 shadow-sm">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-20">
+      <a href="index.html" class="flex items-center space-x-3">
+        <i class="fas fa-hard-hat text-3xl text-orange-700"></i>
+        <span class="text-2xl font-extrabold bg-gradient-to-r from-orange-700 to-orange-900 bg-clip-text text-transparent">SHAN TRADERS</span>
+      </a>
+      <div class="hidden md:flex md:items-center md:space-x-8">
+        <a href="index.html" class="text-gray-700 hover:text-orange-700 font-semibold text-lg">Home</a>
+        <a href="about.html" class="text-gray-700 hover:text-orange-700 font-semibold text-lg">About</a>
+        <a href="products.html" class="text-gray-800 hover:text-orange-700 font-semibold text-lg border-b-2 border-orange-600 pb-1">Products</a>
+        <a href="contact.html" class="text-gray-700 hover:text-orange-700 font-semibold text-lg">Contact</a>
+        <a href="https://wa.me/917025282000" target="_blank" class="bg-green-500 hover:bg-green-600 text-white px-5 py-2.5 rounded-full"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<main class="pt-28 pb-16">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="text-center mb-8" data-aos="fade-down">
+      <h1 class="text-4xl md:text-5xl font-bold text-gray-900">Our <span class="text-orange-700">Products</span></h1>
+      <p class="text-xl text-gray-600 mt-3">Click on any category to explore our premium brands</p>
+    </div>
+
+    <!-- Category Tabs / Filters -->
+    <div class="flex flex-wrap justify-center gap-3 mb-10" data-aos="fade-up">
+      <button class="category-filter tab-button active" data-category="all">All Products</button>
+      <button class="category-filter tab-button" data-category="tmt">TMT Steel</button>
+      <button class="category-filter tab-button" data-category="cement">Cement</button>
+      <button class="category-filter tab-button" data-category="pipes">Pipes</button>
+      <button class="category-filter tab-button" data-category="sheets">Sheets</button>
+      <button class="category-filter tab-button" data-category="gutters">Rain Gutters</button>
+      <button class="category-filter tab-button" data-category="hardware">Hardware</button>
+      <button class="category-filter tab-button" data-category="adhesives">Tile Adhesives</button>
+    </div>
+
+    <!-- Categories Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-12" id="categoryGrid">
+      <!-- TMT Steel -->
+      <div class="category-card" data-category="tmt" onclick="showCategoryDetail('tmt')">
+        <div class="relative h-40 mb-4 overflow-hidden rounded-xl bg-gradient-to-br from-orange-400 to-orange-600">
+          <img src="https://images.unsplash.com/photo-1587486935156-2b3f8b6e5d9c?w=400&h=200&fit=crop" alt="TMT Steel" class="w-full h-full object-cover opacity-80">
+          <div class="absolute inset-0 bg-black/20 flex items-center justify-center">
+            <i class="fas fa-grip-lines text-5xl text-white"></i>
+          </div>
+        </div>
+        <h3 class="text-xl font-bold mb-2">TMT Steel Bars</h3>
+        <p class="text-gray-600 text-sm mb-3">Fe 500 & Fe 550 Grade</p>
+        <div class="flex flex-wrap gap-1">
+          <span class="text-xs bg-orange-100 text-orange-700 px-2 py-1 rounded">Kairali</span>
+          <span class="text-xs bg-orange-100 text-orange-700 px-2 py-1 rounded">Kalliyath</span>
+          <span class="text-xs bg-orange-100 text-orange-700 px-2 py-1 rounded">+3 more</span>
+        </div>
+      </div>
+
+      <!-- Cement -->
+      <div class="category-card" data-category="cement" onclick="showCategoryDetail('cement')">
+        <div class="relative h-40 mb-4 overflow-hidden rounded-xl bg-gradient-to-br from-blue-400 to-blue-600">
+          <img src="https://images.unsplash.com/photo-1518709766631-a6a7f9e7f1f4?w=400&h=200&fit=crop" alt="Cement" class="w-full h-full object-cover opacity-80">
+          <div class="absolute inset-0 bg-black/20 flex items-center justify-center">
+            <i class="fas fa-fill-drip text-5xl text-white"></i>
+          </div>
+        </div>
+        <h3 class="text-xl font-bold mb-2">Cement</h3>
+        <p class="text-gray-600 text-sm mb-3">OPC, PPC & Premium Grade</p>
+        <div class="flex flex-wrap gap-1">
+          <span class="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded">ACC</span>
+          <span class="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded">Ultratech</span>
+          <span class="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded">+3 more</span>
+        </div>
+      </div>
+
+      <!-- Pipes -->
+      <div class="category-card" data-category="pipes" onclick="showCategoryDetail('pipes')">
+        <div class="relative h-40 mb-4 overflow-hidden rounded-xl bg-gradient-to-br from-cyan-400 to-cyan-600">
+          <img src="https://images.unsplash.com/photo-1617953141903-2d7c8f5c5b1e?w=400&h=200&fit=crop" alt="Pipes" class="w-full h-full object-cover opacity-80">
+          <div class="absolute inset-0 bg-black/20 flex items-center justify-center">
+            <i class="fas fa-water text-5xl text-white"></i>
+          </div>
+        </div>
+        <h3 class="text-xl font-bold mb-2">Pipes & Fittings</h3>
+        <p class="text-gray-600 text-sm mb-3">PVC, CPVC & UPVC</p>
+        <div class="flex flex-wrap gap-1">
+          <span class="text-xs bg-cyan-100 text-cyan-700 px-2 py-1 rounded">Demac</span>
+          <span class="text-xs bg-cyan-100 text-cyan-700 px-2 py-1 rounded">Finolex</span>
+          <span class="text-xs bg-cyan-100 text-cyan-700 px-2 py-1 rounded">+2 more</span>
+        </div>
+      </div>
+
+      <!-- Sheets -->
+      <div class="category-card" data-category="sheets" onclick="showCategoryDetail('sheets')">
+        <div class="relative h-40 mb-4 overflow-hidden rounded-xl bg-gradient-to-br from-slate-400 to-slate-600">
+          <img src="https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?w=400&h=200&fit=crop" alt="Sheets" class="w-full h-full object-cover opacity-80">
+          <div class="absolute inset-0 bg-black/20 flex items-center justify-center">
+            <i class="fas fa-layer-group text-5xl text-white"></i>
+          </div>
+        </div>
+        <h3 class="text-xl font-bold mb-2">Sheets & Roofing</h3>
+        <p class="text-gray-600 text-sm mb-3">GI, Colour Coated Sheets</p>
+        <div class="flex flex-wrap gap-1">
+          <span class="text-xs bg-slate-100 text-slate-700 px-2 py-1 rounded">Tata Shakti</span>
+          <span class="text-xs bg-slate-100 text-slate-700 px-2 py-1 rounded">JSW</span>
+          <span class="text-xs bg-slate-100 text-slate-700 px-2 py-1 rounded">+2 more</span>
+        </div>
+      </div>
+
+      <!-- Rain Gutters -->
+      <div class="category-card" data-category="gutters" onclick="showCategoryDetail('gutters')">
+        <div class="relative h-40 mb-4 overflow-hidden rounded-xl bg-gradient-to-br from-sky-400 to-sky-600">
+          <img src="https://images.unsplash.com/photo-1534353436294-6c0e8c3b1f3e?w=400&h=200&fit=crop" alt="Rain Gutters" class="w-full h-full object-cover opacity-80">
+          <div class="absolute inset-0 bg-black/20 flex items-center justify-center">
+            <i class="fas fa-cloud-rain text-5xl text-white"></i>
+          </div>
+        </div>
+        <h3 class="text-xl font-bold mb-2">Rain Gutters</h3>
+        <p class="text-gray-600 text-sm mb-3">PVC & Metal Systems</p>
+        <div class="flex flex-wrap gap-1">
+          <span class="text-xs bg-sky-100 text-sky-700 px-2 py-1 rounded">Finolex</span>
+          <span class="text-xs bg-sky-100 text-sky-700 px-2 py-1 rounded">Supreme</span>
+          <span class="text-xs bg-sky-100 text-sky-700 px-2 py-1 rounded">+2 more</span>
+        </div>
+      </div>
+
+      <!-- Hardware -->
+      <div class="category-card" data-category="hardware" onclick="showCategoryDetail('hardware')">
+        <div class="relative h-40 mb-4 overflow-hidden rounded-xl bg-gradient-to-br from-amber-400 to-amber-600">
+          <img src="https://images.unsplash.com/photo-1581092335871-4c7b80e83e5b?w=400&h=200&fit=crop" alt="Hardware" class="w-full h-full object-cover opacity-80">
+          <div class="absolute inset-0 bg-black/20 flex items-center justify-center">
+            <i class="fas fa-tools text-5xl text-white"></i>
+          </div>
+        </div>
+        <h3 class="text-xl font-bold mb-2">Hardware Items</h3>
+        <p class="text-gray-600 text-sm mb-3">Tools & Accessories</p>
+        <div class="flex flex-wrap gap-1">
+          <span class="text-xs bg-amber-100 text-amber-700 px-2 py-1 rounded">Self Screw</span>
+          <span class="text-xs bg-amber-100 text-amber-700 px-2 py-1 rounded">Silicon</span>
+          <span class="text-xs bg-amber-100 text-amber-700 px-2 py-1 rounded">+3 more</span>
+        </div>
+      </div>
+
+      <!-- Tile Adhesives -->
+      <div class="category-card lg:col-span-1" data-category="adhesives" onclick="showCategoryDetail('adhesives')">
+        <div class="relative h-40 mb-4 overflow-hidden rounded-xl bg-gradient-to-br from-emerald-400 to-emerald-600">
+          <img src="https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?w=400&h=200&fit=crop" alt="Tile Adhesives" class="w-full h-full object-cover opacity-80">
+          <div class="absolute inset-0 bg-black/20 flex items-center justify-center">
+            <i class="fas fa-border-all text-5xl text-white"></i>
+          </div>
+        </div>
+        <h3 class="text-xl font-bold mb-2">Tile Adhesives</h3>
+        <p class="text-gray-600 text-sm mb-3">Grouts & Fixing Solutions</p>
+        <div class="flex flex-wrap gap-1">
+          <span class="text-xs bg-emerald-100 text-emerald-700 px-2 py-1 rounded">MYK Laticrete</span>
+          <span class="text-xs bg-emerald-100 text-emerald-700 px-2 py-1 rounded">Roff</span>
+          <span class="text-xs bg-emerald-100 text-emerald-700 px-2 py-1 rounded">+4 more</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Category Detail Modal -->
+    <div id="categoryModal" class="product-modal">
+      <div class="modal-content">
+        <div class="sticky top-0 bg-white border-b p-4 flex justify-between items-center rounded-t-2xl">
+          <h2 class="text-2xl font-bold" id="modalTitle">TMT Steel Bars</h2>
+          <button onclick="closeModal()" class="w-10 h-10 rounded-full hover:bg-gray-100 flex items-center justify-center">
+            <i class="fas fa-times text-xl"></i>
+          </button>
+        </div>
+        <div class="p-6" id="modalContent">
+          <!-- Dynamic content will be loaded here -->
+        </div>
+        <div class="sticky bottom-0 bg-gray-50 border-t p-4 flex justify-end rounded-b-2xl">
+          <button onclick="closeModal()" class="px-6 py-2 bg-gray-200 hover:bg-gray-300 rounded-full mr-3">Close</button>
+          <a href="contact.html" class="px-6 py-2 bg-orange-700 text-white hover:bg-orange-800 rounded-full">Inquire Now</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="bg-gray-900 text-gray-300 py-10 rounded-t-3xl">
+  <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8">
+    <div>
+      <div class="flex items-center gap-2 text-white text-xl font-bold"><i class="fas fa-hard-hat"></i> SHAN TRADERS</div>
+      <p class="mt-2 text-sm">Quality building materials since 2021</p>
+    </div>
+    <div>
+      <h4 class="text-white font-semibold mb-3">Categories</h4>
+      <ul class="space-y-1 text-sm">
+        <li>TMT Steel</li><li>Cement</li><li>Pipes</li><li>Sheets</li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="text-white font-semibold mb-3">Contact</h4>
+      <p><i class="fas fa-envelope mr-2"></i> shantraders2021@gmail.com</p>
+      <p class="mt-2"><i class="fab fa-whatsapp mr-2"></i> +91 70252 82000</p>
+    </div>
+    <div>
+      <h4 class="text-white font-semibold mb-3">Follow Us</h4>
+      <div class="flex space-x-3">
+        <a href="#" class="w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center hover:bg-blue-700"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="w-10 h-10 bg-gradient-to-br from-purple-600 to-pink-600 text-white rounded-full flex items-center justify-center"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="w-10 h-10 bg-red-600 text-white rounded-full flex items-center justify-center hover:bg-red-700"><i class="fab fa-youtube"></i></a>
+      </div>
+    </div>
+  </div>
+  <div class="text-center text-sm text-gray-500 mt-10 border-t border-gray-800 pt-6">© 2025 Shan Traders. All rights reserved.</div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  AOS.init();
+
+  // Product database with images and brand details
+  const productData = {
+    tmt: {
+      title: 'TMT Steel Bars',
+      description: 'High-strength Fe 500 & Fe 550 grade TMT bars for construction',
+      brands: [
+        { name: 'Kairali TMT', logo: '🔩', image: 'https://images.unsplash.com/photo-1518709766631-a6a7f9e7f1f4?w=150&h=150&fit=crop', description: 'Premium Fe 500 TMT bars' },
+        { name: 'Kalliyath TMT', logo: '🏗️', image: 'https://images.unsplash.com/photo-1587486935156-2b3f8b6e5d9c?w=150&h=150&fit=crop', description: 'Fe 500 & Fe 550 grade' },
+        { name: 'Steelex', logo: '⚙️', image: 'https://images.unsplash.com/photo-1518709766631-a6a7f9e7f1f4?w=150&h=150&fit=crop', description: 'Corrosion resistant TMT' },
+        { name: 'Bharathi TMT', logo: '🔧', image: 'https://images.unsplash.com/photo-1587486935156-2b3f8b6e5d9c?w=150&h=150&fit=crop', description: 'Earthquake resistant' },
+        { name: 'Prince TMT', logo: '👑', image: 'https://images.unsplash.com/photo-1518709766631-a6a7f9e7f1f4?w=150&h=150&fit=crop', description: 'Superior strength bars' }
+      ]
+    },
+    cement: {
+      title: 'Cement',
+      description: 'Premium OPC, PPC and specialty cement for all applications',
+      brands: [
+        { name: 'ACC Cement', logo: '🏭', image: 'https://images.unsplash.com/photo-1518709766631-a6a7f9e7f1f4?w=150&h=150&fit=crop', description: 'Trusted for decades' },
+        { name: 'Ultratech Cement', logo: '💪', image: 'https://images.unsplash.com/photo-1518709766631-a6a7f9e7f1f4?w=150&h=150&fit=crop', description: "India's No.1 cement" },
+        { name: 'Dalmia Cement', logo: '🏢', image: 'https://images.unsplash.com/photo-1518709766631-a6a7f9e7f1f4?w=150&h=150&fit=crop', description: 'Superior quality' },
+        { name: 'Chettinad Cement', logo: '🦁', image: 'https://images.unsplash.com/photo-1518709766631-a6a7f9e7f1f4?w=150&h=150&fit=crop', description: 'South Indian favorite' },
+        { name: 'JSW Cement', logo: '⭐', image: 'https://images.unsplash.com/photo-1518709766631-a6a7f9e7f1f4?w=150&h=150&fit=crop', description: 'Green cement technology' }
+      ]
+    },
+    pipes: {
+      title: 'Pipes & Fittings',
+      description: 'PVC, CPVC & UPVC pipes for plumbing and drainage',
+      brands: [
+        { name: 'Demac Pipes', logo: '💧', image: 'https://images.unsplash.com/photo-1617953141903-2d7c8f5c5b1e?w=150&h=150&fit=crop', description: 'Premium PVC pipes' },
+        { name: 'Finolex', logo: '🚰', image: 'https://images.unsplash.com/photo-1617953141903-2d7c8f5c5b1e?w=150&h=150&fit=crop', description: 'Trusted brand' },
+        { name: 'Supreme', logo: '🔵', image: 'https://images.unsplash.com/photo-1617953141903-2d7c8f5c5b1e?w=150&h=150&fit=crop', description: 'Complete range' },
+        { name: 'Ashirvad', logo: '🟢', image: 'https://images.unsplash.com/photo-1617953141903-2d7c8f5c5b1e?w=150&h=150&fit=crop', description: 'CPVC specialists' }
+      ]
+    },
+    sheets: {
+      title: 'Sheets & Roofing',
+      description: 'GI sheets, colour coated sheets and roofing accessories',
+      brands: [
+        { name: 'Tata Shakti', logo: '🏠', image: 'https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?w=150&h=150&fit=crop', description: 'Premium roofing' },
+        { name: 'JSW Colouron', logo: '🎨', image: 'https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?w=150&h=150&fit=crop', description: 'Colour coated sheets' },
+        { name: 'Everest', logo: '⛰️', image: 'https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?w=150&h=150&fit=crop', description: 'Fibre cement sheets' },
+        { name: 'Ramco', logo: '🏔️', image: 'https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?w=150&h=150&fit=crop', description: 'Quality roofing' }
+      ]
+    },
+    gutters: {
+      title: 'Rain Gutters',
+      description: 'PVC and metal rainwater gutter systems',
+      brands: [
+        { name: 'Finolex Gutters', logo: '🌧️', image: 'https://images.unsplash.com/photo-1534353436294-6c0e8c3b1f3e?w=150&h=150&fit=crop', description: 'PVC gutter systems' },
+        { name: 'Supreme', logo: '☔', image: 'https://images.unsplash.com/photo-1534353436294-6c0e8c3b1f3e?w=150&h=150&fit=crop', description: 'Complete range' },
+        { name: 'Astral', logo: '💦', image: 'https://images.unsplash.com/photo-1534353436294-6c0e8c3b1f3e?w=150&h=150&fit=crop', description: 'Premium quality' },
+        { name: 'Custom Made', logo: '📐', image: 'https://images.unsplash.com/photo-1534353436294-6c0e8c3b1f3e?w=150&h=150&fit=crop', description: 'Tailored solutions' }
+      ]
+    },
+    hardware: {
+      title: 'Hardware Items',
+      description: 'Essential hardware tools and construction accessories',
+      brands: [
+        { name: 'Self Screw', logo: '🔩', image: 'https://images.unsplash.com/photo-1581092335871-4c7b80e83e5b?w=150&h=150&fit=crop', description: 'Various sizes available' },
+        { name: 'Silicon Sealant', logo: '🧴', image: 'https://images.unsplash.com/photo-1581092335871-4c7b80e83e5b?w=150&h=150&fit=crop', description: 'Waterproof sealants' },
+        { name: 'Cutting Blade', logo: '⚔️', image: 'https://images.unsplash.com/photo-1581092335871-4c7b80e83e5b?w=150&h=150&fit=crop', description: 'Metal & tile cutting' },
+        { name: 'Mesh (Net)', logo: '🕸️', image: 'https://images.unsplash.com/photo-1581092335871-4c7b80e83e5b?w=150&h=150&fit=crop', description: 'Construction mesh' },
+        { name: 'Nails & Bolts', logo: '📌', image: 'https://images.unsplash.com/photo-1581092335871-4c7b80e83e5b?w=150&h=150&fit=crop', description: 'All sizes available' }
+      ]
+    },
+    adhesives: {
+      title: 'Tile Adhesives & Grouts',
+      description: 'Premium tile fixing solutions for walls and floors',
+      brands: [
+        { name: 'MYK Laticrete', logo: '🧱', image: 'https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?w=150&h=150&fit=crop', description: 'World-class adhesives' },
+        { name: 'Roff', logo: '🎯', image: 'https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?w=150&h=150&fit=crop', description: 'Professional grade' },
+        { name: 'Dr. Fixit', logo: '👨‍🔧', image: 'https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?w=150&h=150&fit=crop', description: 'Trusted waterproofing' },
+        { name: 'Weber', logo: '🏆', image: 'https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?w=150&h=150&fit=crop', description: 'Premium quality' },
+        { name: 'Bostik', logo: '🔬', image: 'https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?w=150&h=150&fit=crop', description: 'Smart adhesives' },
+        { name: 'Sika', logo: '🇨🇭', image: 'https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?w=150&h=150&fit=crop', description: 'Swiss technology' }
+      ]
+    }
+  };
+
+  // Filter functionality
+  document.querySelectorAll('.category-filter').forEach(btn => {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.category-filter').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      
+      const category = this.dataset.category;
+      const cards = document.querySelectorAll('.category-card');
+      
+      cards.forEach(card => {
+        if (category === 'all' || card.dataset.category === category) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+
+  // Show category detail modal
+  function showCategoryDetail(category) {
+    const data = productData[category];
+    if (!data) return;
+    
+    document.getElementById('modalTitle').textContent = data.title;
+    
+    let html = `
+      <p class="text-gray-600 mb-6">${data.description}</p>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    `;
+    
+    data.brands.forEach(brand => {
+      html += `
+        <div class="brand-card p-4 border rounded-xl hover:shadow-md transition">
+          <div class="flex items-center gap-4">
+            <div class="w-20 h-20 bg-gray-100 rounded-xl flex items-center justify-center overflow-hidden">
+              <img src="${brand.image}" alt="${brand.name}" class="w-full h-full object-cover">
+            </div>
+            <div class="flex-1">
+              <h4 class="font-bold text-lg">${brand.name}</h4>
+              <p class="text-gray-500 text-sm">${brand.description}</p>
+            </div>
+            <span class="text-3xl">${brand.logo}</span>
+          </div>
+        </div>
+      `;
+    });
+    
+    html += `</div>`;
+    
+    document.getElementById('modalContent').innerHTML = html;
+    document.getElementById('categoryModal').style.display = 'block';
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    document.getElementById('categoryModal').style.display = 'none';
+    document.body.style.overflow = 'auto';
+  }
+
+  // Close modal on outside click
+  window.onclick = function(event) {
+    const modal = document.getElementById('categoryModal');
+    if (event.target === modal) {
+      closeModal();
+    }
+  }
+
+  // Make category cards clickable
+  document.querySelectorAll('.category-card').forEach(card => {
+    card.style.cursor = 'pointer';
+  });
+</script>
+</body>
+</html>

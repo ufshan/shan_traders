@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Primary Meta Tags -->
+  <title>Shan Traders - Building Materials Supplier in Perinthaloor | TMT Steel, Cement, Pipes</title>
+  <meta name="title" content="Shan Traders - Building Materials Supplier in Perinthaloor | TMT Steel, Cement, Pipes">
+  <meta name="description" content="Shan Traders - Leading building materials supplier in Perinthaloor, Tirur-Chemravettom Road. Buy premium TMT steel (Kairali, Kalliyath, Steelex), cement (ACC, Ultratech, Dalmia), pipes, roofing sheets, rain gutters, hardware and tile adhesives at best wholesale prices. Open 7am-6pm Mon-Sat.">
+  <meta name="keywords" content="TMT steel Perinthaloor, cement shop Tirur, building materials Kerala, Shan Traders, Kairali TMT, Kalliyath TMT, ACC cement, Ultratech cement">
+  <meta name="author" content="Shan Traders">
+  
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Shan Traders - Premium Building Materials in Perinthaloor">
+  <meta property="og:description" content="Your trusted partner for TMT steel, cement, pipes, sheets, and hardware.">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1587486935156-2b3f8b6e5d9c?w=1200&h=630&fit=crop">
+  
+  <!-- Tailwind + Flowbite + Font Awesome -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  
+  <!-- AOS Animation -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  
+  <!-- Swiper for Brand Slider -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  
+  <style>
+    body { font-family: 'Inter', system-ui, sans-serif; }
+    .hover-lift:hover { transform: translateY(-6px); box-shadow: 0 25px 35px -12px rgba(230,81,0,0.25); }
+    .transition-smooth { transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+    
+    /* Brand Slider Styles */
+    .swiper {
+      padding: 20px 10px;
+    }
+    .swiper-slide {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .brand-slide {
+      background: white;
+      padding: 20px;
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      width: 140px;
+      height: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+    }
+    .brand-slide:hover {
+      box-shadow: 0 8px 24px rgba(230,81,0,0.15);
+      transform: translateY(-4px);
+    }
+    
+    /* Sticky CTA */
+    .sticky-cta {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 40;
+      background: linear-gradient(135deg, #e65100, #bf360c);
+      color: white;
+      padding: 14px 28px;
+      border-radius: 60px;
+      font-weight: 700;
+      box-shadow: 0 8px 30px rgba(230,81,0,0.4);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      transition: all 0.3s;
+      border: 2px solid rgba(255,255,255,0.3);
+      animation: pulse 2s infinite;
+    }
+    .sticky-cta:hover {
+      transform: translateX(-50%) scale(1.05);
+      box-shadow: 0 12px 40px rgba(230,81,0,0.5);
+    }
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 8px 30px rgba(230,81,0,0.4); }
+      50% { box-shadow: 0 8px 40px rgba(230,81,0,0.7); }
+    }
+    
+    /* Logo in header */
+    .company-logo-img {
+      width: 50px;
+      height: 50px;
+      object-fit: contain;
+    }
+    
+    /* Product image styles */
+    .product-img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 16px 16px 0 0;
+    }
+  </style>
+</head>
+<body class="bg-gray-50 text-gray-800 antialiased">
+
+<!-- Sticky CTA Button -->
+<a href="tel:+917025282000" class="sticky-cta md:hidden">
+  <i class="fas fa-phone-alt"></i>
+  <span>Call Now: +91 70252 82000</span>
+</a>
+
+<!-- Navigation with Logo -->
+<nav class="bg-white/80 backdrop-blur-md fixed w-full z-50 top-0 start-0 border-b border-gray-200 shadow-sm">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-20">
+      <a href="index.html" class="flex items-center space-x-3">
+        <!-- Company Logo -->
+        <div class="w-12 h-12 bg-gradient-to-br from-orange-600 to-orange-800 rounded-xl flex items-center justify-center shadow-md">
+          <span class="text-white font-bold text-xl">ST</span>
+        </div>
+        <div>
+          <span class="text-2xl font-extrabold bg-gradient-to-r from-orange-700 to-orange-900 bg-clip-text text-transparent">SHAN TRADERS</span>
+          <p class="text-xs text-gray-500 -mt-1">Building Materials Supplier</p>
+        </div>
+      </a>
+      <div class="hidden md:flex md:items-center md:space-x-8">
+        <a href="index.html" class="text-gray-800 hover:text-orange-700 font-semibold text-lg border-b-2 border-orange-600 pb-1">Home</a>
+        <a href="about.html" class="text-gray-700 hover:text-orange-700 font-semibold text-lg">About</a>
+        <a href="products.html" class="text-gray-700 hover:text-orange-700 font-semibold text-lg">Products</a>
+        <a href="contact.html" class="text-gray-700 hover:text-orange-700 font-semibold text-lg">Contact</a>
+        <a href="https://wa.me/917025282000" target="_blank" class="bg-green-500 hover:bg-green-600 text-white px-5 py-2.5 rounded-full font-medium flex items-center gap-2"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+      </div>
+      <button data-collapse-toggle="mobile-menu" class="inline-flex md:hidden p-2">
+        <i class="fas fa-bars text-2xl"></i>
+      </button>
+    </div>
+  </div>
+  <div class="hidden md:hidden" id="mobile-menu">
+    <div class="px-4 pt-2 pb-6 space-y-3 bg-white border-t">
+      <a href="index.html" class="block py-2 text-orange-700 font-semibold">Home</a>
+      <a href="about.html" class="block py-2 text-gray-700">About</a>
+      <a href="products.html" class="block py-2 text-gray-700">Products</a>
+      <a href="contact.html" class="block py-2 text-gray-700">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<main id="main-content" class="pt-24">
+  <!-- Hero Section -->
+  <section class="relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 py-12 md:py-20">
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div data-aos="fade-right">
+          <span class="bg-orange-100 text-orange-800 text-sm font-semibold px-4 py-1.5 rounded-full inline-block mb-4"><i class="fas fa-map-pin mr-2"></i>Perinthaloor, Tirur-Chemravettom Rd</span>
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight text-gray-900">
+            Build <span class="text-orange-700">Stronger</span><br>With Trusted Materials
+          </h1>
+          <p class="text-xl text-gray-600 mt-4">Premium TMT Steel, Cement, Pipes, Sheets & Hardware — everything under one roof in Perinthaloor.</p>
+          <div class="flex flex-wrap gap-5 mt-8">
+            <a href="products.html" class="bg-gradient-to-r from-orange-700 to-orange-800 text-white px-8 py-4 rounded-full font-bold shadow-lg hover:-translate-y-1 transition flex items-center gap-2"><i class="fas fa-boxes"></i> Explore Products</a>
+            <a href="#quote-form" class="border-2 border-orange-700 text-orange-700 hover:bg-orange-700 hover:text-white px-8 py-4 rounded-full font-bold transition flex items-center gap-2"><i class="fas fa-file-invoice"></i> Get Quote</a>
+          </div>
+        </div>
+        <div class="relative" data-aos="fade-left">
+          <img src="https://images.unsplash.com/photo-1587486935156-2b3f8b6e5d9c?w=600&h=400&fit=crop" alt="Building Materials at Shan Traders" class="rounded-3xl shadow-2xl">
+          <div class="absolute -bottom-4 -right-4 bg-white p-4 rounded-2xl shadow-xl">
+            <p class="font-bold text-orange-700">15+ Years Experience</p>
+            <p class="text-sm text-gray-600">Trusted Supplier</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Brand Logos Slider -->
+  <section class="py-12 bg-white border-y">
+    <div class="max-w-7xl mx-auto px-4">
+      <h2 class="text-2xl font-bold text-center mb-8">Our Trusted <span class="text-orange-700">Brand Partners</span></h2>
+      <div class="swiper brandSwiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide"><div class="brand-slide"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/ACC_Logo.svg/320px-ACC_Logo.svg.png" alt="ACC Cement" class="h-12 object-contain"></div></div>
+          <div class="swiper-slide"><div class="brand-slide"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/UltraTech_Cement_Logo.svg/320px-UltraTech_Cement_Logo.svg.png" alt="Ultratech" class="h-12 object-contain"></div></div>
+          <div class="swiper-slide"><div class="brand-slide"><img src="https://www.kairalitmt.com/images/logo.png" alt="Kairali TMT" class="h-12 object-contain"></div></div>
+          <div class="swiper-slide"><div class="brand-slide"><img src="https://kalliyath.com/wp-content/uploads/2022/03/kalliyath-logo.png" alt="Kalliyath TMT" class="h-12 object-contain"></div></div>
+          <div class="swiper-slide"><div class="brand-slide"><img src="https://www.jswcement.com/images/jsw-logo.png" alt="JSW Cement" class="h-12 object-contain"></div></div>
+          <div class="swiper-slide"><div class="brand-slide"><span class="text-2xl font-bold text-blue-600">DALMIA</span></div></div>
+          <div class="swiper-slide"><div class="brand-slide"><span class="text-2xl font-bold text-green-700">CHETTINAD</span></div></div>
+          <div class="swiper-slide"><div class="brand-slide"><span class="text-2xl font-bold text-orange-600">STEELEX</span></div></div>
+        </div>
+        <div class="swiper-pagination"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Products with Images -->
+  <section class="py-16 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4">
+      <h2 class="text-3xl md:text-4xl font-bold text-center mb-4" data-aos="fade-up">Our <span class="text-orange-700">Premium Products</span></h2>
+      <p class="text-center text-gray-600 mb-12">Quality materials for every construction need</p>
+      
+      <div class="grid md:grid-cols-3 gap-6">
+        <!-- TMT Steel -->
+        <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover-lift transition-smooth" data-aos="fade-up">
+          <img src="https://images.unsplash.com/photo-1518709766631-a6a7f9e7f1f4?w=400&h=250&fit=crop" alt="TMT Steel Bars" class="product-img">
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-2">TMT Steel Bars</h3>
+            <p class="text-gray-600 mb-4">Fe 500 & Fe 550 Grade</p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="text-xs bg-orange-100 text-orange-700 px-3 py-1 rounded-full">Kairali</span>
+              <span class="text-xs bg-orange-100 text-orange-700 px-3 py-1 rounded-full">Kalliyath</span>
+              <span class="text-xs bg-orange-100 text-orange-700 px-3 py-1 rounded-full">Steelex</span>
+            </div>
+            <a href="products.html" class="text-orange-700 font-semibold hover:underline">View Details →</a>
+          </div>
+        </div>
+        
+        <!-- Cement -->
+        <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover-lift transition-smooth" data-aos="fade-up" data-aos-delay="100">
+          <img src="https://images.unsplash.com/photo-1587486935156-2b3f8b6e5d9c?w=400&h=250&fit=crop" alt="Cement Bags" class="product-img">
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-2">Premium Cement</h3>
+            <p class="text-gray-600 mb-4">OPC, PPC & Specialty Cement</p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="text-xs bg-blue-100 text-blue-700 px-3 py-1 rounded-full">ACC</span>
+              <span class="text-xs bg-blue-100 text-blue-700 px-3 py-1 rounded-full">Ultratech</span>
+              <span class="text-xs bg-blue-100 text-blue-700 px-3 py-1 rounded-full">Dalmia</span>
+            </div>
+            <a href="products.html" class="text-orange-700 font-semibold hover:underline">View Details →</a>
+          </div>
+        </div>
+        
+        <!-- Pipes -->
+        <div class="bg-white rounded-2xl shadow-lg overflow-hidden hover-lift transition-smooth" data-aos="fade-up" data-aos-delay="200">
+          <img src="https://images.unsplash.com/photo-1617953141903-2d7c8f5c5b1e?w=400&h=250&fit=crop" alt="PVC Pipes" class="product-img">
+          <div class="p-6">
+            <h3 class="text-xl font-bold mb-2">Pipes & Fittings</h3>
+            <p class="text-gray-600 mb-4">PVC, CPVC & UPVC Pipes</p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="text-xs bg-cyan-100 text-cyan-700 px-3 py-1 rounded-full">Demac</span>
+              <span class="text-xs bg-cyan-100 text-cyan-700 px-3 py-1 rounded-full">Finolex</span>
+              <span class="text-xs bg-cyan-100 text-cyan-700 px-3 py-1 rounded-full">Supreme</span>
+            </div>
+            <a href="products.html" class="text-orange-700 font-semibold hover:underline">View Details →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Get Quote Form Section -->
+  <section id="quote-form" class="py-16 bg-gradient-to-br from-orange-50 to-white">
+    <div class="max-w-4xl mx-auto px-4">
+      <div class="bg-white rounded-3xl shadow-2xl p-8 md:p-12" data-aos="fade-up">
+        <div class="text-center mb-8">
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Get a <span class="text-orange-700">Free Quote</span></h2>
+          <p class="text-gray-600 mt-2">Tell us what you need, and we'll get back to you with the best price</p>
+        </div>
+        
+        <form id="quoteForm" class="space-y-6">
+          <div class="grid md:grid-cols-2 gap-6">
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">Full Name *</label>
+              <input type="text" required class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500" placeholder="Enter your name">
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">Phone Number *</label>
+              <input type="tel" required class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-500" placeholder="+91 XXXXX XXXXX">
+            </div>
+          </div>
+          
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+            <input type="email" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-500" placeholder="your@email.com">
+          </div>
+          
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Product Category *</label>
+            <select required class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-500">
+              <option value="">Select product category</option>
+              <option value="tmt">TMT Steel Bars</option>
+              <option value="cement">Cement</option>
+              <option value="pipes">Pipes & Fittings</option>
+              <option value="sheets">Sheets & Roofing</option>
+              <option value="gutters">Rain Gutters</option>
+              <option value="hardware">Hardware Items</option>
+              <option value="adhesives">Tile Adhesives</option>
+            </select>
+          </div>
+          
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">Quantity / Details *</label>
+            <textarea required rows="4" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-500" placeholder="Please specify quantity, brand preference, and any other requirements..."></textarea>
+          </div>
+          
+          <div>
+            <button type="submit" class="w-full bg-gradient-to-r from-orange-700 to-orange-800 text-white py-4 rounded-xl font-bold text-lg hover:shadow-lg transition flex items-center justify-center gap-2">
+              <i class="fas fa-paper-plane"></i> Submit Quote Request
+            </button>
+          </div>
+          
+          <p class="text-xs text-gray-500 text-center">We respect your privacy. Your information will only be used to respond to your inquiry.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Customer Testimonials -->
+  <section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4">
+      <h2 class="text-3xl md:text-4xl font-bold text-center mb-4" data-aos="fade-up">What Our <span class="text-orange-700">Customers Say</span></h2>
+      <p class="text-center text-gray-600 mb-12">Trusted by contractors and homeowners across Perinthaloor</p>
+      
+      <div class="grid md:grid-cols-3 gap-6">
+        <!-- Testimonial 1 -->
+        <div class="bg-gray-50 rounded-2xl p-6 shadow-md hover:shadow-lg transition" data-aos="fade-up">
+          <div class="flex items-center gap-1 mb-4 text-yellow-400">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+          </div>
+          <p class="text-gray-700 mb-4">"Best place for construction materials in Perinthaloor. Got all my TMT steel and cement at competitive rates. Highly recommended!"</p>
+          <div class="flex items-center gap-3">
+            <div class="w-12 h-12 bg-orange-200 rounded-full flex items-center justify-center">
+              <span class="text-orange-700 font-bold">RS</span>
+            </div>
+            <div>
+              <p class="font-semibold">Rajan S.</p>
+              <p class="text-sm text-gray-500">Local Contractor</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Testimonial 2 -->
+        <div class="bg-gray-50 rounded-2xl p-6 shadow-md hover:shadow-lg transition" data-aos="fade-up" data-aos-delay="100">
+          <div class="flex items-center gap-1 mb-4 text-yellow-400">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+          </div>
+          <p class="text-gray-700 mb-4">"Very helpful staff. They guided me on the right cement grade for my house construction. Timely delivery and genuine products."</p>
+          <div class="flex items-center gap-3">
+            <div class="w-12 h-12 bg-green-200 rounded-full flex items-center justify-center">
+              <span class="text-green-700 font-bold">MK</span>
+            </div>
+            <div>
+              <p class="font-semibold">Mohammed K.</p>
+              <p class="text-sm text-gray-500">Homeowner</p>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Testimonial 3 -->
+        <div class="bg-gray-50 rounded-2xl p-6 shadow-md hover:shadow-lg transition" data-aos="fade-up" data-aos-delay="200">
+          <div class="flex items-center gap-1 mb-4 text-yellow-400">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+          </div>
+          <p class="text-gray-700 mb-4">"I've been buying from Shan Traders for years. Best prices on Kairali TMT and ACC cement. Never disappointed with quality."</p>
+          <div class="flex items-center gap-3">
+            <div class="w-12 h-12 bg-blue-200 rounded-full flex items-center justify-center">
+              <span class="text-blue-700 font-bold">PV</span>
+            </div>
+            <div>
+              <p class="font-semibold">Praveen V.</p>
+              <p class="text-sm text-gray-500">Builder</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Choose Us -->
+  <section class="py-16 bg-gradient-to-b from-white to-orange-50">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div data-aos="fade-right">
+          <h2 class="text-3xl font-bold mb-6">Why Choose <span class="text-orange-700">Shan Traders</span></h2>
+          <div class="space-y-4">
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center flex-shrink-0"><i class="fas fa-check text-orange-700"></i></div>
+              <div><h4 class="font-bold text-lg">100% Genuine Products</h4><p class="text-gray-600">All materials sourced from authorized distributors</p></div>
+            </div>
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center flex-shrink-0"><i class="fas fa-check text-orange-700"></i></div>
+              <div><h4 class="font-bold text-lg">Competitive Pricing</h4><p class="text-gray-600">Best wholesale rates for bulk orders</p></div>
+            </div>
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center flex-shrink-0"><i class="fas fa-check text-orange-700"></i></div>
+              <div><h4 class="font-bold text-lg">Local Delivery</h4><p class="text-gray-600">Fast delivery across Perinthaloor and nearby areas</p></div>
+            </div>
+          </div>
+        </div>
+        <div data-aos="fade-left">
+          <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=500&h=400&fit=crop" alt="Shan Traders Store" class="rounded-3xl shadow-2xl">
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- Footer -->
+<footer class="bg-gray-900 text-gray-300 py-10 rounded-t-3xl">
+  <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8">
+    <div>
+      <div class="flex items-center gap-2">
+        <div class="w-10 h-10 bg-gradient-to-br from-orange-600 to-orange-800 rounded-lg flex items-center justify-center">
+          <span class="text-white font-bold">ST</span>
+        </div>
+        <span class="text-white text-xl font-bold">SHAN TRADERS</span>
+      </div>
+      <p class="mt-4 text-sm">Building materials supplier since 2021. Quality products at best prices.</p>
+    </div>
+    <div>
+      <h4 class="text-white font-semibold mb-3">Quick Links</h4>
+      <ul class="space-y-2"><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="products.html">Products</a></li><li><a href="contact.html">Contact</a></li></ul>
+    </div>
+    <div>
+      <h4 class="text-white font-semibold mb-3">Contact</h4>
+      <p><i class="fas fa-envelope mr-2"></i> shantraders2021@gmail.com</p>
+      <p class="mt-2"><i class="fab fa-whatsapp mr-2"></i> +91 70252 82000</p>
+      <p class="mt-2"><i class="fas fa-map-marker-alt mr-2"></i> Perinthaloor, Tirur-Chemravettom Road</p>
+    </div>
+    <div>
+      <h4 class="text-white font-semibold mb-3">Follow Us</h4>
+      <div class="flex space-x-3">
+        <a href="#" class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="w-10 h-10 bg-gradient-to-br from-purple-600 to-pink-600 rounded-full flex items-center justify-center"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="w-10 h-10 bg-red-600 rounded-full flex items-center justify-center"><i class="fab fa-youtube"></i></a>
+      </div>
+    </div>
+  </div>
+  <div class="text-center text-sm text-gray-500 mt-10 border-t border-gray-800 pt-6">© 2025 Shan Traders. All rights reserved.</div>
+</footer>
+
+<!-- Scripts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+  AOS.init();
+  
+  // Brand Slider
+  new Swiper('.brandSwiper', {
+    slidesPerView: 2,
+    spaceBetween: 20,
+    loop: true,
+    autoplay: { delay: 2000, disableOnInteraction: false },
+    pagination: { clickable: true },
+    breakpoints: {
+      640: { slidesPerView: 3 },
+      768: { slidesPerView: 4 },
+      1024: { slidesPerView: 5 }
+    }
+  });
+  
+  // Form submission
+  document.getElementById('quoteForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    alert('Thank you for your quote request! We will contact you shortly.');
+    this.reset();
+  });
+</script>
+</body>
+</html>
