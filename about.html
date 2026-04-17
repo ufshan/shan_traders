@@ -3,89 +3,366 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About — Shan Traders</title>
+  <title>About Shan Traders | Premium Building Materials in Perinthaloor</title>
+  <meta name="description" content="Learn about Shan Traders - established 2021 in Perinthaloor. Trusted supplier of TMT steel, cement, pipes, and hardware. Quality products, competitive prices.">
+  
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-  <style>body{font-family:'Inter',sans-serif}</style>
+  
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+    
+    body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+    
+    /* Glassmorphism */
+    .nav-blur {
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+    
+    /* Floating shapes */
+    .floating-shape {
+      position: absolute;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, rgba(230,81,0,0.12), transparent 70%);
+      filter: blur(45px);
+      z-index: -1;
+    }
+    
+    /* Logo styling */
+    .company-logo-img {
+      height: 45px;
+      width: auto;
+      max-width: 120px;
+      object-fit: contain;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.05));
+    }
+    .logo-fallback {
+      background: linear-gradient(135deg, #e65100, #bf360c);
+      color: white;
+      font-weight: bold;
+      font-size: 20px;
+      width: 45px;
+      height: 45px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 8px rgba(230,81,0,0.2);
+    }
+    
+    /* Scroll top */
+    .scroll-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 50px;
+      height: 50px;
+      background: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s;
+      z-index: 44;
+      border: 1px solid rgba(230,81,0,0.2);
+      color: #e65100;
+    }
+    .scroll-top.show {
+      opacity: 1;
+      visibility: visible;
+    }
+    .scroll-top:hover {
+      background: #e65100;
+      color: white;
+      transform: translateY(-5px);
+    }
+    
+    /* Value card hover */
+    .value-card {
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .value-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 25px 30px -12px rgba(230,81,0,0.15);
+    }
+  </style>
 </head>
-<body class="bg-gray-50">
+<body class="bg-gray-50 text-gray-800 antialiased">
 
-<!-- Navigation (same as other pages) -->
-<nav class="bg-white/80 backdrop-blur-md fixed w-full z-50 top-0 start-0 border-b border-gray-200 shadow-sm">
+<!-- Scroll to top -->
+<div class="scroll-top" id="scrollTop">
+  <i class="fas fa-arrow-up text-xl"></i>
+</div>
+
+<!-- Navigation with Logo -->
+<nav class="nav-blur fixed w-full z-50 top-0 start-0 border-b border-gray-200/50 shadow-sm">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between items-center h-20">
-      <a href="index.html" class="flex items-center space-x-3">
-        <i class="fas fa-hard-hat text-3xl text-orange-700"></i>
-        <span class="text-2xl font-extrabold bg-gradient-to-r from-orange-700 to-orange-900 bg-clip-text text-transparent">SHAN TRADERS</span>
+      <a href="index.html" class="flex items-center space-x-3 group">
+        <img src="logo.jpeg" alt="Shan Traders Logo" class="company-logo-img transition group-hover:scale-105" 
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="logo-fallback" style="display: none;">ST</div>
+        <div>
+          <span class="text-2xl font-extrabold bg-gradient-to-r from-orange-700 to-orange-900 bg-clip-text text-transparent">SHAN TRADERS</span>
+          <p class="text-xs text-gray-500 -mt-1 font-medium">Building Materials Supplier</p>
+        </div>
       </a>
       <div class="hidden md:flex md:items-center md:space-x-8">
-        <a href="index.html" class="text-gray-700 hover:text-orange-700 font-semibold text-lg">Home</a>
+        <a href="index.html" class="text-gray-700 hover:text-orange-700 font-semibold text-lg transition">Home</a>
         <a href="about.html" class="text-gray-800 hover:text-orange-700 font-semibold text-lg border-b-2 border-orange-600 pb-1">About</a>
-        <a href="products.html" class="text-gray-700 hover:text-orange-700 font-semibold text-lg">Products</a>
-        <a href="contact.html" class="text-gray-700 hover:text-orange-700 font-semibold text-lg">Contact</a>
-        <a href="https://wa.me/917025282000" target="_blank" class="bg-green-500 hover:bg-green-600 text-white px-5 py-2.5 rounded-full"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+        <a href="products.html" class="text-gray-700 hover:text-orange-700 font-semibold text-lg transition">Products</a>
+        <a href="contact.html" class="text-gray-700 hover:text-orange-700 font-semibold text-lg transition">Contact</a>
+        <a href="https://wa.me/917025282000" target="_blank" class="bg-green-500 hover:bg-green-600 text-white px-5 py-2.5 rounded-full font-medium flex items-center gap-2 transition shadow-md"><i class="fab fa-whatsapp"></i> WhatsApp</a>
       </div>
+      <button data-collapse-toggle="mobile-menu" class="inline-flex md:hidden p-2 hover:bg-gray-100 rounded-lg transition">
+        <i class="fas fa-bars text-2xl"></i>
+      </button>
+    </div>
+  </div>
+  <div class="hidden md:hidden" id="mobile-menu">
+    <div class="px-4 pt-2 pb-6 space-y-3 bg-white/95 backdrop-blur-sm border-t">
+      <a href="index.html" class="block py-3 text-gray-700 text-lg">Home</a>
+      <a href="about.html" class="block py-3 text-orange-700 font-semibold text-lg">About</a>
+      <a href="products.html" class="block py-3 text-gray-700 text-lg">Products</a>
+      <a href="contact.html" class="block py-3 text-gray-700 text-lg">Contact</a>
     </div>
   </div>
 </nav>
 
-<main class="pt-28 pb-16">
-  <div class="max-w-7xl mx-auto px-4">
-    <div class="text-center mb-12" data-aos="fade-down">
-      <h1 class="text-4xl md:text-5xl font-bold text-gray-900">About <span class="text-orange-700">Shan Traders</span></h1>
-      <p class="text-xl text-gray-600 mt-3">Your trusted building partner in Perinthaloor</p>
+<main class="pt-24">
+  <!-- Hero Section -->
+  <section class="relative overflow-hidden py-12 md:py-16">
+    <div class="floating-shape w-96 h-96 -top-32 -right-32"></div>
+    <div class="floating-shape w-64 h-64 bottom-0 left-0 opacity-50"></div>
+    
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="text-center mb-10" data-aos="fade-down">
+        <span class="bg-orange-100 text-orange-800 text-sm font-semibold px-5 py-2 rounded-full inline-block mb-4">Our Journey</span>
+        <h1 class="text-4xl md:text-6xl font-extrabold text-gray-900">About <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-700 to-red-700">Shan Traders</span></h1>
+        <p class="text-xl text-gray-600 mt-4 max-w-3xl mx-auto">Your trusted partner for premium building materials in Perinthaloor and beyond</p>
+      </div>
     </div>
+  </section>
 
-    <div class="grid md:grid-cols-2 gap-12 items-center">
-      <div data-aos="fade-right">
-        <div class="bg-white rounded-3xl p-8 shadow-xl border">
-          <i class="fas fa-store text-4xl text-orange-700 mb-5"></i>
-          <h2 class="text-2xl font-bold mb-4">Our Story</h2>
-          <p class="text-gray-600 leading-relaxed">Established in 2021, Shan Traders has become the preferred building materials supplier in Perinthaloor and surrounding areas. We take pride in offering genuine products at competitive prices with exceptional customer service.</p>
-          <div class="mt-6 space-y-3">
-            <div class="flex items-center gap-3"><i class="fas fa-check-circle text-green-600"></i> 100% Genuine Products</div>
-            <div class="flex items-center gap-3"><i class="fas fa-check-circle text-green-600"></i> Competitive Wholesale Rates</div>
-            <div class="flex items-center gap-3"><i class="fas fa-check-circle text-green-600"></i> Expert Technical Guidance</div>
-            <div class="flex items-center gap-3"><i class="fas fa-check-circle text-green-600"></i> Timely Local Delivery</div>
+  <!-- Story + Hours Section -->
+  <section class="py-8">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="grid md:grid-cols-2 gap-10 items-stretch">
+        <!-- Story Card -->
+        <div class="bg-white rounded-3xl p-8 md:p-10 shadow-xl border border-gray-100 relative overflow-hidden" data-aos="fade-right">
+          <div class="absolute -top-10 -right-10 w-32 h-32 bg-orange-100 rounded-full opacity-40 blur-2xl"></div>
+          <div class="relative">
+            <div class="flex items-center gap-3 mb-6">
+              <div class="w-14 h-14 bg-gradient-to-br from-orange-500 to-orange-700 rounded-2xl flex items-center justify-center shadow-lg">
+                <i class="fas fa-store text-2xl text-white"></i>
+              </div>
+              <h2 class="text-3xl font-bold">Our Story</h2>
+            </div>
+            <p class="text-gray-600 leading-relaxed text-lg mb-6">
+              Established in 2021, Shan Traders began with a simple mission: to provide high-quality construction materials at honest prices. Located on the bustling Tirur-Chemravettom Road in Perinthaloor, we've grown into a trusted name among contractors, builders, and homeowners.
+            </p>
+            <p class="text-gray-600 leading-relaxed">
+              We believe that strong buildings start with strong materials. That's why we partner only with reputed brands and ensure every product we sell meets rigorous quality standards.
+            </p>
+            
+            <!-- Core Values -->
+            <div class="mt-8 grid grid-cols-2 gap-4">
+              <div class="flex items-center gap-3 bg-orange-50 p-3 rounded-xl">
+                <i class="fas fa-medal text-orange-600"></i>
+                <span class="font-medium">Quality First</span>
+              </div>
+              <div class="flex items-center gap-3 bg-green-50 p-3 rounded-xl">
+                <i class="fas fa-hand-holding-heart text-green-600"></i>
+                <span class="font-medium">Customer Focus</span>
+              </div>
+              <div class="flex items-center gap-3 bg-blue-50 p-3 rounded-xl">
+                <i class="fas fa-shield-alt text-blue-600"></i>
+                <span class="font-medium">Integrity</span>
+              </div>
+              <div class="flex items-center gap-3 bg-purple-50 p-3 rounded-xl">
+                <i class="fas fa-truck text-purple-600"></i>
+                <span class="font-medium">Reliability</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Hours & Location Card -->
+        <div class="bg-gradient-to-br from-gray-900 to-gray-800 text-white rounded-3xl p-8 md:p-10 shadow-2xl relative overflow-hidden" data-aos="fade-left">
+          <div class="absolute -bottom-16 -right-16 w-48 h-48 bg-orange-500/10 rounded-full blur-3xl"></div>
+          <div class="relative">
+            <div class="flex items-center gap-3 mb-6">
+              <div class="w-14 h-14 bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-2xl flex items-center justify-center shadow-lg">
+                <i class="fas fa-clock text-2xl text-white"></i>
+              </div>
+              <h3 class="text-3xl font-bold">Store Hours</h3>
+            </div>
+            
+            <div class="space-y-5 mt-8">
+              <div class="flex justify-between items-center border-b border-gray-700 pb-4">
+                <span class="text-lg">Monday – Saturday</span>
+                <span class="font-bold text-xl text-yellow-400">7:00 AM – 6:00 PM</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-lg">Sunday</span>
+                <span class="font-bold text-xl text-yellow-400">7:00 AM – 12:00 PM</span>
+              </div>
+            </div>
+            
+            <div class="mt-10 bg-gray-800/60 backdrop-blur-sm p-6 rounded-2xl border border-gray-700">
+              <div class="flex items-start gap-4">
+                <i class="fas fa-map-pin text-2xl text-orange-400 mt-1"></i>
+                <div>
+                  <p class="font-semibold text-white text-lg">Visit Our Store</p>
+                  <p class="text-gray-300">Perinthaloor, Tirur-Chemravettom Road,<br>Malappuram, Kerala</p>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Social Links -->
+            <div class="mt-8 flex gap-4">
+              <a href="#" class="w-12 h-12 bg-white/10 hover:bg-blue-600 rounded-full flex items-center justify-center transition"><i class="fab fa-facebook-f text-white"></i></a>
+              <a href="#" class="w-12 h-12 bg-white/10 hover:bg-gradient-to-br from-purple-600 to-pink-600 rounded-full flex items-center justify-center transition"><i class="fab fa-instagram text-white"></i></a>
+              <a href="#" class="w-12 h-12 bg-white/10 hover:bg-red-600 rounded-full flex items-center justify-center transition"><i class="fab fa-youtube text-white"></i></a>
+            </div>
           </div>
         </div>
       </div>
-      <div data-aos="fade-left" class="bg-gray-900 text-white rounded-3xl p-8 shadow-2xl">
-        <i class="fas fa-clock text-3xl text-yellow-400 mb-4"></i>
-        <h3 class="text-2xl font-bold mb-6">Store Hours</h3>
-        <div class="space-y-4">
-          <div class="flex justify-between border-b border-gray-700 pb-3"><span>Monday – Saturday</span><span class="font-semibold">7:00 AM – 6:00 PM</span></div>
-          <div class="flex justify-between"><span>Sunday</span><span class="font-semibold">7:00 AM – 12:00 PM</span></div>
+    </div>
+  </section>
+
+  <!-- Why Choose Us (Expanded Values) -->
+  <section class="py-20">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="text-center mb-14" data-aos="fade-up">
+        <h2 class="text-4xl font-bold">Why <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-700 to-red-700">Choose Us</span></h2>
+        <p class="text-gray-600 text-lg mt-3">We don't just sell materials — we build relationships</p>
+      </div>
+      
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="value-card bg-white rounded-3xl p-8 shadow-lg border border-gray-100 text-center" data-aos="fade-up" data-aos-delay="100">
+          <div class="w-20 h-20 bg-gradient-to-br from-orange-100 to-orange-200 rounded-2xl flex items-center justify-center mx-auto mb-6">
+            <i class="fas fa-certificate text-4xl text-orange-700"></i>
+          </div>
+          <h3 class="text-2xl font-bold mb-3">100% Genuine</h3>
+          <p class="text-gray-600">All products sourced directly from authorized distributors with manufacturer warranty.</p>
         </div>
-        <div class="mt-8 bg-gray-800 p-5 rounded-2xl">
-          <i class="fas fa-location-dot mr-2 text-orange-400"></i> Perinthaloor, Tirur-Chemravettom Road
+        <div class="value-card bg-white rounded-3xl p-8 shadow-lg border border-gray-100 text-center" data-aos="fade-up" data-aos-delay="200">
+          <div class="w-20 h-20 bg-gradient-to-br from-green-100 to-green-200 rounded-2xl flex items-center justify-center mx-auto mb-6">
+            <i class="fas fa-rupee-sign text-4xl text-green-700"></i>
+          </div>
+          <h3 class="text-2xl font-bold mb-3">Best Prices</h3>
+          <p class="text-gray-600">Wholesale rates for bulk orders. We beat any genuine quote in the area.</p>
         </div>
-        <!-- Social Links -->
-        <div class="mt-6 flex gap-3">
-          <a href="#" class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center hover:bg-blue-700"><i class="fab fa-facebook-f"></i></a>
-          <a href="#" class="w-10 h-10 bg-gradient-to-br from-purple-600 to-pink-600 rounded-full flex items-center justify-center hover:from-purple-700 hover:to-pink-700"><i class="fab fa-instagram"></i></a>
-          <a href="#" class="w-10 h-10 bg-red-600 rounded-full flex items-center justify-center hover:bg-red-700"><i class="fab fa-youtube"></i></a>
+        <div class="value-card bg-white rounded-3xl p-8 shadow-lg border border-gray-100 text-center" data-aos="fade-up" data-aos-delay="300">
+          <div class="w-20 h-20 bg-gradient-to-br from-blue-100 to-blue-200 rounded-2xl flex items-center justify-center mx-auto mb-6">
+            <i class="fas fa-truck-fast text-4xl text-blue-700"></i>
+          </div>
+          <h3 class="text-2xl font-bold mb-3">Fast Delivery</h3>
+          <p class="text-gray-600">Local delivery across Perinthaloor, Tirur, and nearby areas within 24 hours.</p>
         </div>
       </div>
     </div>
-  </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="py-16">
+    <div class="max-w-5xl mx-auto px-4">
+      <div class="bg-gradient-to-r from-orange-700 to-red-700 rounded-3xl p-10 md:p-14 text-center text-white shadow-2xl" data-aos="zoom-in">
+        <h2 class="text-3xl md:text-4xl font-bold mb-4">Ready to build something great?</h2>
+        <p class="text-white/90 text-lg mb-8 max-w-2xl mx-auto">Contact us today for a free consultation and quote on your construction material needs.</p>
+        <div class="flex flex-wrap justify-center gap-5">
+          <a href="contact.html" class="bg-white text-orange-700 hover:bg-gray-100 px-8 py-4 rounded-full font-bold transition transform hover:-translate-y-1 shadow-lg">Get in Touch</a>
+          <a href="tel:+917025282000" class="border-2 border-white text-white hover:bg-white hover:text-orange-700 px-8 py-4 rounded-full font-bold transition"><i class="fas fa-phone-alt mr-2"></i> Call Now</a>
+        </div>
+      </div>
+    </div>
+  </section>
 </main>
 
-<!-- Footer -->
-<footer class="bg-gray-900 text-gray-300 py-10 rounded-t-3xl">
-  <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8">
-    <div><div class="flex items-center gap-2 text-white text-xl font-bold"><i class="fas fa-hard-hat"></i> SHAN TRADERS</div></div>
-    <div><h4 class="text-white font-semibold mb-3">Quick Links</h4><ul class="space-y-2"><li><a href="index.html">Home</a></li><li><a href="about.html">About</a></li><li><a href="products.html">Products</a></li><li><a href="contact.html">Contact</a></li></ul></div>
-    <div><h4 class="text-white font-semibold mb-3">Contact</h4><p><i class="fas fa-envelope mr-2"></i> shantraders2021@gmail.com</p><p class="mt-2"><i class="fab fa-whatsapp mr-2"></i> +91 70252 82000</p></div>
-    <div><h4 class="text-white font-semibold mb-3">Follow Us</h4><div class="flex space-x-3"><a href="#" class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center"><i class="fab fa-facebook-f"></i></a><a href="#" class="w-10 h-10 bg-gradient-to-br from-purple-600 to-pink-600 rounded-full flex items-center justify-center"><i class="fab fa-instagram"></i></a><a href="#" class="w-10 h-10 bg-red-600 rounded-full flex items-center justify-center"><i class="fab fa-youtube"></i></a></div></div>
+<!-- Enhanced Footer -->
+<footer class="bg-gray-900 text-gray-300 pt-16 pb-8 rounded-t-[40px] mt-10">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
+      <div>
+        <div class="flex items-center gap-3 mb-4">
+          <img src="images/logo.png" alt="Shan Traders Logo" class="h-10 w-auto max-w-[100px] object-contain brightness-0 invert" 
+               onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="w-10 h-10 bg-gradient-to-br from-orange-600 to-orange-800 rounded-lg items-center justify-center" style="display: none;">
+            <span class="text-white font-bold">ST</span>
+          </div>
+          <span class="text-white text-2xl font-bold">SHAN TRADERS</span>
+        </div>
+        <p class="text-sm text-gray-400 leading-relaxed">Quality building materials since 2021. Your trusted partner in construction.</p>
+      </div>
+      <div>
+        <h4 class="text-white font-semibold text-lg mb-5">Quick Links</h4>
+        <ul class="space-y-3">
+          <li><a href="index.html" class="text-gray-400 hover:text-white transition flex items-center gap-2"><i class="fas fa-chevron-right text-xs text-orange-500"></i> Home</a></li>
+          <li><a href="about.html" class="text-gray-400 hover:text-white transition flex items-center gap-2"><i class="fas fa-chevron-right text-xs text-orange-500"></i> About Us</a></li>
+          <li><a href="products.html" class="text-gray-400 hover:text-white transition flex items-center gap-2"><i class="fas fa-chevron-right text-xs text-orange-500"></i> Products</a></li>
+          <li><a href="contact.html" class="text-gray-400 hover:text-white transition flex items-center gap-2"><i class="fas fa-chevron-right text-xs text-orange-500"></i> Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-white font-semibold text-lg mb-5">Contact</h4>
+        <ul class="space-y-4">
+          <li class="flex items-start gap-3"><i class="fas fa-envelope text-orange-500 mt-1"></i><span class="text-gray-400">shantraders2021@gmail.com</span></li>
+          <li class="flex items-start gap-3"><i class="fab fa-whatsapp text-orange-500 mt-1"></i><span class="text-gray-400">+91 70252 82000</span></li>
+          <li class="flex items-start gap-3"><i class="fas fa-map-marker-alt text-orange-500 mt-1"></i><span class="text-gray-400">Perinthaloor, Tirur-Chemravettom Road</span></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-white font-semibold text-lg mb-5">Follow Us</h4>
+        <div class="flex space-x-3">
+          <a href="#" class="w-10 h-10 bg-gray-800 hover:bg-blue-600 rounded-full flex items-center justify-center transition"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="w-10 h-10 bg-gray-800 hover:bg-gradient-to-br from-purple-600 to-pink-600 rounded-full flex items-center justify-center transition"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="w-10 h-10 bg-gray-800 hover:bg-red-600 rounded-full flex items-center justify-center transition"><i class="fab fa-youtube"></i></a>
+        </div>
+        <div class="mt-6 p-4 bg-gray-800 rounded-xl">
+          <p class="text-sm text-gray-300"><i class="fas fa-clock text-orange-400 mr-2"></i> Mon-Sat: 7am-6pm | Sun: 7am-12pm</p>
+        </div>
+      </div>
+    </div>
+    <div class="border-t border-gray-800 mt-12 pt-8 text-center text-sm text-gray-500">
+      <p>© 2025 Shan Traders. All rights reserved. | Built with <i class="fas fa-heart text-red-500 mx-1"></i> in Perinthaloor</p>
+    </div>
   </div>
-  <div class="text-center text-sm text-gray-500 mt-10 border-t border-gray-800 pt-6">© 2025 Shan Traders.</div>
 </footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script>AOS.init();</script>
+<script>
+  AOS.init({ once: true, duration: 800 });
+  
+  // Scroll to top
+  const scrollBtn = document.getElementById('scrollTop');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 400) scrollBtn.classList.add('show');
+    else scrollBtn.classList.remove('show');
+  });
+  scrollBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+  
+  // Mobile menu toggle
+  const toggleBtn = document.querySelector('[data-collapse-toggle]');
+  const mobileMenu = document.getElementById('mobile-menu');
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+  }
+</script>
 </body>
 </html>
