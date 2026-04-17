@@ -3,22 +3,75 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Products — Shan Traders</title>
+  <title>Products | Shan Traders - Premium Building Materials</title>
+  <meta name="description" content="Explore our wide range of building materials: TMT steel, cement, pipes, sheets, rain gutters, hardware, and tile adhesives from top brands at best prices in Perinthaloor.">
+  
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  
   <style>
-    body { font-family: 'Inter', system-ui, sans-serif; }
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+    
+    body { font-family: 'Inter', system-ui, sans-serif; scroll-behavior: smooth; }
+    
+    /* Glassmorphism */
+    .nav-blur {
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    
+    /* Floating shapes */
+    .floating-shape {
+      position: absolute;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, rgba(230,81,0,0.12), transparent 70%);
+      filter: blur(45px);
+      z-index: -1;
+    }
+    
+    /* Logo styling */
+    .company-logo-img {
+      height: 45px;
+      width: auto;
+      max-width: 120px;
+      object-fit: contain;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.05));
+    }
+    .logo-fallback {
+      background: linear-gradient(135deg, #e65100, #bf360c);
+      color: white;
+      font-weight: bold;
+      font-size: 20px;
+      width: 45px;
+      height: 45px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 8px rgba(230,81,0,0.2);
+    }
+    
+    /* Category card enhancements */
     .category-card {
-      @apply bg-white p-6 rounded-2xl shadow-lg border hover:shadow-xl transition-all hover:-translate-y-1 cursor-pointer;
+      @apply bg-white rounded-2xl shadow-lg border border-gray-100 transition-all cursor-pointer overflow-hidden;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
-    .category-card.active {
-      @apply border-orange-500 ring-2 ring-orange-200;
+    .category-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 25px 30px -12px rgba(230,81,0,0.15);
+      border-color: rgba(230,81,0,0.2);
     }
-    .brand-card {
-      @apply bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-all;
+    .category-card .card-img {
+      transition: transform 0.5s ease;
     }
+    .category-card:hover .card-img {
+      transform: scale(1.05);
+    }
+    
+    /* Modal styling */
     .product-modal {
       display: none;
       position: fixed;
@@ -28,198 +81,251 @@
       width: 100%;
       height: 100%;
       background-color: rgba(0,0,0,0.5);
-      backdrop-filter: blur(5px);
+      backdrop-filter: blur(8px);
     }
     .modal-content {
       background: white;
-      margin: 5% auto;
-      padding: 0;
+      margin: 3% auto;
       width: 90%;
-      max-width: 800px;
-      border-radius: 24px;
-      max-height: 85vh;
+      max-width: 900px;
+      border-radius: 28px;
+      max-height: 90vh;
       overflow-y: auto;
+      box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+      border: 1px solid rgba(255,255,255,0.3);
     }
-    .product-image {
-      aspect-ratio: 1/1;
-      object-fit: cover;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    }
-    .brand-logo {
-      width: 60px;
-      height: 60px;
-      object-fit: contain;
-      background: #f3f4f6;
-      border-radius: 12px;
-      padding: 8px;
-    }
-    /* Tab navigation */
+    
+    /* Tab buttons */
     .tab-button {
-      @apply px-6 py-3 font-semibold text-gray-600 hover:text-orange-700 border-b-2 border-transparent transition-all;
+      @apply px-5 py-2.5 font-semibold text-gray-600 hover:text-orange-700 border-b-2 border-transparent transition-all;
     }
     .tab-button.active {
-      @apply text-orange-700 border-orange-700;
+      @apply text-orange-700 border-orange-700 bg-orange-50/50;
+    }
+    
+    /* Scroll top */
+    .scroll-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 50px;
+      height: 50px;
+      background: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s;
+      z-index: 44;
+      border: 1px solid rgba(230,81,0,0.2);
+      color: #e65100;
+    }
+    .scroll-top.show {
+      opacity: 1;
+      visibility: visible;
+    }
+    .scroll-top:hover {
+      background: #e65100;
+      color: white;
+      transform: translateY(-5px);
     }
   </style>
 </head>
-<body class="bg-gray-50">
+<body class="bg-gray-50 text-gray-800 antialiased">
 
-<!-- Navigation -->
-<nav class="bg-white/80 backdrop-blur-md fixed w-full z-40 top-0 start-0 border-b border-gray-200 shadow-sm">
+<!-- Scroll to top -->
+<div class="scroll-top" id="scrollTop">
+  <i class="fas fa-arrow-up text-xl"></i>
+</div>
+
+<!-- Navigation with Logo -->
+<nav class="nav-blur fixed w-full z-40 top-0 start-0 border-b border-gray-200/50 shadow-sm">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between items-center h-20">
-      <a href="index.html" class="flex items-center space-x-3">
-        <i class="fas fa-hard-hat text-3xl text-orange-700"></i>
-        <span class="text-2xl font-extrabold bg-gradient-to-r from-orange-700 to-orange-900 bg-clip-text text-transparent">SHAN TRADERS</span>
+      <a href="index.html" class="flex items-center space-x-3 group">
+        <img src="logo.png" alt="Shan Traders Logo" class="company-logo-img transition group-hover:scale-105" 
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="logo-fallback" style="display: none;">ST</div>
+        <div>
+          <span class="text-2xl font-extrabold bg-gradient-to-r from-orange-700 to-orange-900 bg-clip-text text-transparent">SHAN TRADERS</span>
+          <p class="text-xs text-gray-500 -mt-1 font-medium">Building Materials Supplier</p>
+        </div>
       </a>
       <div class="hidden md:flex md:items-center md:space-x-8">
-        <a href="index.html" class="text-gray-700 hover:text-orange-700 font-semibold text-lg">Home</a>
-        <a href="about.html" class="text-gray-700 hover:text-orange-700 font-semibold text-lg">About</a>
+        <a href="index.html" class="text-gray-700 hover:text-orange-700 font-semibold text-lg transition">Home</a>
+        <a href="about.html" class="text-gray-700 hover:text-orange-700 font-semibold text-lg transition">About</a>
         <a href="products.html" class="text-gray-800 hover:text-orange-700 font-semibold text-lg border-b-2 border-orange-600 pb-1">Products</a>
-        <a href="contact.html" class="text-gray-700 hover:text-orange-700 font-semibold text-lg">Contact</a>
-        <a href="https://wa.me/917025282000" target="_blank" class="bg-green-500 hover:bg-green-600 text-white px-5 py-2.5 rounded-full"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+        <a href="contact.html" class="text-gray-700 hover:text-orange-700 font-semibold text-lg transition">Contact</a>
+        <a href="https://wa.me/917025282000" target="_blank" class="bg-green-500 hover:bg-green-600 text-white px-5 py-2.5 rounded-full font-medium flex items-center gap-2 transition shadow-md"><i class="fab fa-whatsapp"></i> WhatsApp</a>
       </div>
+      <button data-collapse-toggle="mobile-menu" class="inline-flex md:hidden p-2 hover:bg-gray-100 rounded-lg transition">
+        <i class="fas fa-bars text-2xl"></i>
+      </button>
+    </div>
+  </div>
+  <div class="hidden md:hidden" id="mobile-menu">
+    <div class="px-4 pt-2 pb-6 space-y-3 bg-white/95 backdrop-blur-sm border-t">
+      <a href="index.html" class="block py-3 text-gray-700 text-lg">Home</a>
+      <a href="about.html" class="block py-3 text-gray-700 text-lg">About</a>
+      <a href="products.html" class="block py-3 text-orange-700 font-semibold text-lg">Products</a>
+      <a href="contact.html" class="block py-3 text-gray-700 text-lg">Contact</a>
     </div>
   </div>
 </nav>
 
-<main class="pt-28 pb-16">
-  <div class="max-w-7xl mx-auto px-4">
-    <div class="text-center mb-8" data-aos="fade-down">
-      <h1 class="text-4xl md:text-5xl font-bold text-gray-900">Our <span class="text-orange-700">Products</span></h1>
-      <p class="text-xl text-gray-600 mt-3">Click on any category to explore our premium brands</p>
+<main class="pt-24 pb-16">
+  <!-- Floating shapes -->
+  <div class="floating-shape w-96 h-96 -top-32 -right-32"></div>
+  <div class="floating-shape w-64 h-64 bottom-0 left-0 opacity-50"></div>
+
+  <div class="max-w-7xl mx-auto px-4 relative">
+    <div class="text-center mb-10" data-aos="fade-down">
+      <span class="bg-orange-100 text-orange-800 text-sm font-semibold px-5 py-2 rounded-full inline-block mb-4">Our Catalog</span>
+      <h1 class="text-4xl md:text-6xl font-extrabold text-gray-900">Our <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-700 to-red-700">Products</span></h1>
+      <p class="text-xl text-gray-600 mt-4 max-w-3xl mx-auto">Click on any category to explore premium brands and detailed specifications</p>
     </div>
 
     <!-- Category Tabs / Filters -->
-    <div class="flex flex-wrap justify-center gap-3 mb-10" data-aos="fade-up">
-      <button class="category-filter tab-button active" data-category="all">All Products</button>
-      <button class="category-filter tab-button" data-category="tmt">TMT Steel</button>
-      <button class="category-filter tab-button" data-category="cement">Cement</button>
-      <button class="category-filter tab-button" data-category="pipes">Pipes</button>
-      <button class="category-filter tab-button" data-category="sheets">Sheets</button>
-      <button class="category-filter tab-button" data-category="gutters">Rain Gutters</button>
-      <button class="category-filter tab-button" data-category="hardware">Hardware</button>
-      <button class="category-filter tab-button" data-category="adhesives">Tile Adhesives</button>
+    <div class="flex flex-wrap justify-center gap-2 md:gap-3 mb-12" data-aos="fade-up">
+      <button class="category-filter tab-button active text-sm md:text-base" data-category="all">All Products</button>
+      <button class="category-filter tab-button text-sm md:text-base" data-category="tmt">TMT Steel</button>
+      <button class="category-filter tab-button text-sm md:text-base" data-category="cement">Cement</button>
+      <button class="category-filter tab-button text-sm md:text-base" data-category="pipes">Pipes</button>
+      <button class="category-filter tab-button text-sm md:text-base" data-category="sheets">Sheets</button>
+      <button class="category-filter tab-button text-sm md:text-base" data-category="gutters">Rain Gutters</button>
+      <button class="category-filter tab-button text-sm md:text-base" data-category="hardware">Hardware</button>
+      <button class="category-filter tab-button text-sm md:text-base" data-category="adhesives">Tile Adhesives</button>
     </div>
 
     <!-- Categories Grid -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-12" id="categoryGrid">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12" id="categoryGrid">
       <!-- TMT Steel -->
-      <div class="category-card" data-category="tmt" onclick="showCategoryDetail('tmt')">
-        <div class="relative h-40 mb-4 overflow-hidden rounded-xl bg-gradient-to-br from-orange-400 to-orange-600">
-          <img src="tmt.jpg" alt="TMT Steel" class="w-full h-full object-cover opacity-80">
-          <div class="absolute inset-0 bg-black/20 flex items-center justify-center">
-            <i class="fas fa-grip-lines text-5xl text-white"></i>
-          </div>
+      <div class="category-card group" data-category="tmt" onclick="showCategoryDetail('tmt')">
+        <div class="relative h-44 overflow-hidden">
+          <img src="tmt.jpg" alt="TMT Steel" class="card-img w-full h-full object-cover">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+          <div class="absolute bottom-3 left-3 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-semibold text-orange-700">5 Brands</div>
         </div>
-        <h3 class="text-xl font-bold mb-2">TMT Steel Bars</h3>
-        <p class="text-gray-600 text-sm mb-3">Fe 500 & Fe 550 Grade</p>
-        <div class="flex flex-wrap gap-1">
-          <span class="text-xs bg-orange-100 text-orange-700 px-2 py-1 rounded">Kairali</span>
-          <span class="text-xs bg-orange-100 text-orange-700 px-2 py-1 rounded">Kalliyath</span>
-          <span class="text-xs bg-orange-100 text-orange-700 px-2 py-1 rounded">+3 more</span>
+        <div class="p-5">
+          <h3 class="text-xl font-bold mb-1">TMT Steel Bars</h3>
+          <p class="text-gray-500 text-sm mb-3">Fe 500 & Fe 550 Grade</p>
+          <div class="flex flex-wrap gap-1">
+            <span class="text-xs bg-orange-100 text-orange-700 px-2 py-1 rounded-full">Kairali</span>
+            <span class="text-xs bg-orange-100 text-orange-700 px-2 py-1 rounded-full">Kalliyath</span>
+            <span class="text-xs bg-orange-100 text-orange-700 px-2 py-1 rounded-full">+3</span>
+          </div>
         </div>
       </div>
 
       <!-- Cement -->
-      <div class="category-card" data-category="cement" onclick="showCategoryDetail('cement')">
-        <div class="relative h-40 mb-4 overflow-hidden rounded-xl bg-gradient-to-br from-blue-400 to-blue-600">
-          <img src="cement.jpg" alt="Cement" class="w-full h-full object-cover opacity-80">
-          <div class="absolute inset-0 bg-black/20 flex items-center justify-center">
-            <i class="fas fa-fill-drip text-5xl text-white"></i>
-          </div>
+      <div class="category-card group" data-category="cement" onclick="showCategoryDetail('cement')">
+        <div class="relative h-44 overflow-hidden">
+          <img src="cement.jpg" alt="Cement" class="card-img w-full h-full object-cover">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+          <div class="absolute bottom-3 left-3 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-semibold text-blue-700">5 Brands</div>
         </div>
-        <h3 class="text-xl font-bold mb-2">Cement</h3>
-        <p class="text-gray-600 text-sm mb-3">OPC, PPC & Premium Grade</p>
-        <div class="flex flex-wrap gap-1">
-          <span class="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded">ACC</span>
-          <span class="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded">Ultratech</span>
-          <span class="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded">+3 more</span>
+        <div class="p-5">
+          <h3 class="text-xl font-bold mb-1">Premium Cement</h3>
+          <p class="text-gray-500 text-sm mb-3">OPC, PPC & Specialty</p>
+          <div class="flex flex-wrap gap-1">
+            <span class="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full">ACC</span>
+            <span class="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full">Ultratech</span>
+            <span class="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full">+3</span>
+          </div>
         </div>
       </div>
 
       <!-- Pipes -->
-      <div class="category-card" data-category="pipes" onclick="showCategoryDetail('pipes')">
-        <div class="relative h-40 mb-4 overflow-hidden rounded-xl bg-gradient-to-br from-cyan-400 to-cyan-600">
-          <img src="pipe.jpg" alt="Pipes" class="w-full h-full object-cover opacity-80">
-          <div class="absolute inset-0 bg-black/20 flex items-center justify-center">
-            <i class="fas fa-water text-5xl text-white"></i>
-          </div>
+      <div class="category-card group" data-category="pipes" onclick="showCategoryDetail('pipes')">
+        <div class="relative h-44 overflow-hidden">
+          <img src="pipe.jpg" alt="Pipes" class="card-img w-full h-full object-cover">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+          <div class="absolute bottom-3 left-3 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-semibold text-cyan-700">4 Brands</div>
         </div>
-        <h3 class="text-xl font-bold mb-2">Pipes & Fittings</h3>
-        <p class="text-gray-600 text-sm mb-3">PVC, CPVC & UPVC</p>
-        <div class="flex flex-wrap gap-1">
-          <span class="text-xs bg-cyan-100 text-cyan-700 px-2 py-1 rounded">Demac</span>
-          <span class="text-xs bg-cyan-100 text-cyan-700 px-2 py-1 rounded">Finolex</span>
-          <span class="text-xs bg-cyan-100 text-cyan-700 px-2 py-1 rounded">+2 more</span>
+        <div class="p-5">
+          <h3 class="text-xl font-bold mb-1">Pipes & Fittings</h3>
+          <p class="text-gray-500 text-sm mb-3">PVC, CPVC & UPVC</p>
+          <div class="flex flex-wrap gap-1">
+            <span class="text-xs bg-cyan-100 text-cyan-700 px-2 py-1 rounded-full">Demac</span>
+            <span class="text-xs bg-cyan-100 text-cyan-700 px-2 py-1 rounded-full">Finolex</span>
+            <span class="text-xs bg-cyan-100 text-cyan-700 px-2 py-1 rounded-full">+2</span>
+          </div>
         </div>
       </div>
 
       <!-- Sheets -->
-      <div class="category-card" data-category="sheets" onclick="showCategoryDetail('sheets')">
-        <div class="relative h-40 mb-4 overflow-hidden rounded-xl bg-gradient-to-br from-slate-400 to-slate-600">
-          <img src="sheet.jpg" alt="Sheets" class="w-full h-full object-cover opacity-80">
-          <div class="absolute inset-0 bg-black/20 flex items-center justify-center">
-            <i class="fas fa-layer-group text-5xl text-white"></i>
-          </div>
+      <div class="category-card group" data-category="sheets" onclick="showCategoryDetail('sheets')">
+        <div class="relative h-44 overflow-hidden">
+          <img src="sheet.jpg" alt="Sheets" class="card-img w-full h-full object-cover">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+          <div class="absolute bottom-3 left-3 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-semibold text-slate-700">4 Brands</div>
         </div>
-        <h3 class="text-xl font-bold mb-2">Sheets & Roofing</h3>
-        <p class="text-gray-600 text-sm mb-3">GI, Colour Coated Sheets</p>
-        <div class="flex flex-wrap gap-1">
-          <span class="text-xs bg-slate-100 text-slate-700 px-2 py-1 rounded">Tata Shakti</span>
-          <span class="text-xs bg-slate-100 text-slate-700 px-2 py-1 rounded">JSW</span>
-          <span class="text-xs bg-slate-100 text-slate-700 px-2 py-1 rounded">+2 more</span>
+        <div class="p-5">
+          <h3 class="text-xl font-bold mb-1">Sheets & Roofing</h3>
+          <p class="text-gray-500 text-sm mb-3">GI, Colour Coated</p>
+          <div class="flex flex-wrap gap-1">
+            <span class="text-xs bg-slate-100 text-slate-700 px-2 py-1 rounded-full">Tata Shakti</span>
+            <span class="text-xs bg-slate-100 text-slate-700 px-2 py-1 rounded-full">JSW</span>
+            <span class="text-xs bg-slate-100 text-slate-700 px-2 py-1 rounded-full">+2</span>
+          </div>
         </div>
       </div>
 
       <!-- Rain Gutters -->
-      <div class="category-card" data-category="gutters" onclick="showCategoryDetail('gutters')">
-        <div class="relative h-40 mb-4 overflow-hidden rounded-xl bg-gradient-to-br from-sky-400 to-sky-600">
-          <img src="raingutter.png" alt="Rain Gutters" class="w-full h-full object-cover opacity-80">
-          <div class="absolute inset-0 bg-black/20 flex items-center justify-center">
-            <i class="fas fa-cloud-rain text-5xl text-white"></i>
-          </div>
+      <div class="category-card group" data-category="gutters" onclick="showCategoryDetail('gutters')">
+        <div class="relative h-44 overflow-hidden">
+          <img src="raingutter.png" alt="Rain Gutters" class="card-img w-full h-full object-cover">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+          <div class="absolute bottom-3 left-3 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-semibold text-sky-700">4 Brands</div>
         </div>
-        <h3 class="text-xl font-bold mb-2">Rain Gutters</h3>
-        <p class="text-gray-600 text-sm mb-3">PVC & Metal Systems</p>
-        <div class="flex flex-wrap gap-1">
-          <span class="text-xs bg-sky-100 text-sky-700 px-2 py-1 rounded">Finolex</span>
-          <span class="text-xs bg-sky-100 text-sky-700 px-2 py-1 rounded">Supreme</span>
-          <span class="text-xs bg-sky-100 text-sky-700 px-2 py-1 rounded">+2 more</span>
+        <div class="p-5">
+          <h3 class="text-xl font-bold mb-1">Rain Gutters</h3>
+          <p class="text-gray-500 text-sm mb-3">PVC & Metal Systems</p>
+          <div class="flex flex-wrap gap-1">
+            <span class="text-xs bg-sky-100 text-sky-700 px-2 py-1 rounded-full">Finolex</span>
+            <span class="text-xs bg-sky-100 text-sky-700 px-2 py-1 rounded-full">Supreme</span>
+            <span class="text-xs bg-sky-100 text-sky-700 px-2 py-1 rounded-full">+2</span>
+          </div>
         </div>
       </div>
 
       <!-- Hardware -->
-      <div class="category-card" data-category="hardware" onclick="showCategoryDetail('hardware')">
-        <div class="relative h-40 mb-4 overflow-hidden rounded-xl bg-gradient-to-br from-amber-400 to-amber-600">
-          <img src="harware.png" alt="Hardware" class="w-full h-full object-cover opacity-80">
-          <div class="absolute inset-0 bg-black/20 flex items-center justify-center">
-            <i class="fas fa-tools text-5xl text-white"></i>
-          </div>
+      <div class="category-card group" data-category="hardware" onclick="showCategoryDetail('hardware')">
+        <div class="relative h-44 overflow-hidden">
+          <img src="harware.png" alt="Hardware" class="card-img w-full h-full object-cover">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+          <div class="absolute bottom-3 left-3 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-semibold text-amber-700">5 Brands</div>
         </div>
-        <h3 class="text-xl font-bold mb-2">Hardware Items</h3>
-        <p class="text-gray-600 text-sm mb-3">Tools & Accessories</p>
-        <div class="flex flex-wrap gap-1">
-          <span class="text-xs bg-amber-100 text-amber-700 px-2 py-1 rounded">Self Screw</span>
-          <span class="text-xs bg-amber-100 text-amber-700 px-2 py-1 rounded">Silicon</span>
-          <span class="text-xs bg-amber-100 text-amber-700 px-2 py-1 rounded">+3 more</span>
+        <div class="p-5">
+          <h3 class="text-xl font-bold mb-1">Hardware Items</h3>
+          <p class="text-gray-500 text-sm mb-3">Tools & Accessories</p>
+          <div class="flex flex-wrap gap-1">
+            <span class="text-xs bg-amber-100 text-amber-700 px-2 py-1 rounded-full">Self Screw</span>
+            <span class="text-xs bg-amber-100 text-amber-700 px-2 py-1 rounded-full">Silicon</span>
+            <span class="text-xs bg-amber-100 text-amber-700 px-2 py-1 rounded-full">+3</span>
+          </div>
         </div>
       </div>
 
       <!-- Tile Adhesives -->
-      <div class="category-card lg:col-span-1" data-category="adhesives" onclick="showCategoryDetail('adhesives')">
-        <div class="relative h-40 mb-4 overflow-hidden rounded-xl bg-gradient-to-br from-emerald-400 to-emerald-600">
-          <img src="tile.png" alt="Tile Adhesives" class="w-full h-full object-cover opacity-80">
-          <div class="absolute inset-0 bg-black/20 flex items-center justify-center">
-            <i class="fas fa-border-all text-5xl text-white"></i>
-          </div>
+      <div class="category-card group lg:col-span-1" data-category="adhesives" onclick="showCategoryDetail('adhesives')">
+        <div class="relative h-44 overflow-hidden">
+          <img src="tile.png" alt="Tile Adhesives" class="card-img w-full h-full object-cover">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+          <div class="absolute bottom-3 left-3 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-semibold text-emerald-700">6 Brands</div>
         </div>
-        <h3 class="text-xl font-bold mb-2">Tile Adhesives</h3>
-        <p class="text-gray-600 text-sm mb-3">Grouts & Fixing Solutions</p>
-        <div class="flex flex-wrap gap-1">
-          <span class="text-xs bg-emerald-100 text-emerald-700 px-2 py-1 rounded">MYK Laticrete</span>
-          <span class="text-xs bg-emerald-100 text-emerald-700 px-2 py-1 rounded">Roff</span>
-          <span class="text-xs bg-emerald-100 text-emerald-700 px-2 py-1 rounded">+4 more</span>
+        <div class="p-5">
+          <h3 class="text-xl font-bold mb-1">Tile Adhesives</h3>
+          <p class="text-gray-500 text-sm mb-3">Grouts & Fixing Solutions</p>
+          <div class="flex flex-wrap gap-1">
+            <span class="text-xs bg-emerald-100 text-emerald-700 px-2 py-1 rounded-full">MYK Laticrete</span>
+            <span class="text-xs bg-emerald-100 text-emerald-700 px-2 py-1 rounded-full">Roff</span>
+            <span class="text-xs bg-emerald-100 text-emerald-700 px-2 py-1 rounded-full">+4</span>
+          </div>
         </div>
       </div>
     </div>
@@ -227,188 +333,211 @@
     <!-- Category Detail Modal -->
     <div id="categoryModal" class="product-modal">
       <div class="modal-content">
-        <div class="sticky top-0 bg-white border-b p-4 flex justify-between items-center rounded-t-2xl">
-          <h2 class="text-2xl font-bold" id="modalTitle">TMT Steel Bars</h2>
-          <button onclick="closeModal()" class="w-10 h-10 rounded-full hover:bg-gray-100 flex items-center justify-center">
+        <div class="sticky top-0 bg-white/90 backdrop-blur-sm border-b p-5 flex justify-between items-center rounded-t-2xl">
+          <h2 class="text-2xl font-bold text-gray-900" id="modalTitle">TMT Steel Bars</h2>
+          <button onclick="closeModal()" class="w-10 h-10 rounded-full hover:bg-gray-200 flex items-center justify-center transition">
             <i class="fas fa-times text-xl"></i>
           </button>
         </div>
         <div class="p-6" id="modalContent">
-          <!-- Dynamic content will be loaded here -->
+          <!-- Dynamic content loaded via JS -->
         </div>
-        <div class="sticky bottom-0 bg-gray-50 border-t p-4 flex justify-end rounded-b-2xl">
-          <button onclick="closeModal()" class="px-6 py-2 bg-gray-200 hover:bg-gray-300 rounded-full mr-3">Close</button>
-          <a href="contact.html" class="px-6 py-2 bg-orange-700 text-white hover:bg-orange-800 rounded-full">Inquire Now</a>
+        <div class="sticky bottom-0 bg-gray-50/90 backdrop-blur-sm border-t p-5 flex justify-end gap-3 rounded-b-2xl">
+          <button onclick="closeModal()" class="px-6 py-2.5 bg-gray-200 hover:bg-gray-300 rounded-full font-medium transition">Close</button>
+          <a href="contact.html" class="px-6 py-2.5 bg-gradient-to-r from-orange-700 to-orange-800 text-white hover:shadow-lg rounded-full font-medium transition flex items-center gap-2">Inquire Now <i class="fas fa-arrow-right"></i></a>
         </div>
       </div>
     </div>
   </div>
 </main>
 
-<!-- Footer -->
-<footer class="bg-gray-900 text-gray-300 py-10 rounded-t-3xl">
-  <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8">
-    <div>
-      <div class="flex items-center gap-2 text-white text-xl font-bold"><i class="fas fa-hard-hat"></i> SHAN TRADERS</div>
-      <p class="mt-2 text-sm">Quality building materials since 2021</p>
-    </div>
-    <div>
-      <h4 class="text-white font-semibold mb-3">Categories</h4>
-      <ul class="space-y-1 text-sm">
-        <li>TMT Steel</li><li>Cement</li><li>Pipes</li><li>Sheets</li>
-      </ul>
-    </div>
-    <div>
-      <h4 class="text-white font-semibold mb-3">Contact</h4>
-      <p><i class="fas fa-envelope mr-2"></i> shantraders2021@gmail.com</p>
-      <p class="mt-2"><i class="fab fa-whatsapp mr-2"></i> +91 70252 82000</p>
-    </div>
-    <div>
-      <h4 class="text-white font-semibold mb-3">Follow Us</h4>
-      <div class="flex space-x-3">
-        <a href="#" class="w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center hover:bg-blue-700"><i class="fab fa-facebook-f"></i></a>
-        <a href="#" class="w-10 h-10 bg-gradient-to-br from-purple-600 to-pink-600 text-white rounded-full flex items-center justify-center"><i class="fab fa-instagram"></i></a>
-        <a href="#" class="w-10 h-10 bg-red-600 text-white rounded-full flex items-center justify-center hover:bg-red-700"><i class="fab fa-youtube"></i></a>
+<!-- Enhanced Footer -->
+<footer class="bg-gray-900 text-gray-300 pt-16 pb-8 rounded-t-[40px] mt-10">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
+      <div>
+        <div class="flex items-center gap-3 mb-4">
+          <img src="images/logo.png" alt="Shan Traders Logo" class="h-10 w-auto max-w-[100px] object-contain brightness-0 invert" 
+               onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="w-10 h-10 bg-gradient-to-br from-orange-600 to-orange-800 rounded-lg items-center justify-center" style="display: none;">
+            <span class="text-white font-bold">ST</span>
+          </div>
+          <span class="text-white text-2xl font-bold">SHAN TRADERS</span>
+        </div>
+        <p class="text-sm text-gray-400 leading-relaxed">Quality building materials since 2021. Premium products at competitive prices.</p>
+        <div class="flex space-x-4 mt-6">
+          <a href="#" class="w-10 h-10 bg-gray-800 hover:bg-blue-600 rounded-full flex items-center justify-center transition"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="w-10 h-10 bg-gray-800 hover:bg-gradient-to-br from-purple-600 to-pink-600 rounded-full flex items-center justify-center transition"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="w-10 h-10 bg-gray-800 hover:bg-red-600 rounded-full flex items-center justify-center transition"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+      <div>
+        <h4 class="text-white font-semibold text-lg mb-5">Categories</h4>
+        <ul class="space-y-3">
+          <li><a href="#" class="text-gray-400 hover:text-white transition flex items-center gap-2" onclick="filterCategory('tmt')"><i class="fas fa-chevron-right text-xs text-orange-500"></i> TMT Steel</a></li>
+          <li><a href="#" class="text-gray-400 hover:text-white transition flex items-center gap-2" onclick="filterCategory('cement')"><i class="fas fa-chevron-right text-xs text-orange-500"></i> Cement</a></li>
+          <li><a href="#" class="text-gray-400 hover:text-white transition flex items-center gap-2" onclick="filterCategory('pipes')"><i class="fas fa-chevron-right text-xs text-orange-500"></i> Pipes</a></li>
+          <li><a href="#" class="text-gray-400 hover:text-white transition flex items-center gap-2" onclick="filterCategory('sheets')"><i class="fas fa-chevron-right text-xs text-orange-500"></i> Sheets</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-white font-semibold text-lg mb-5">Contact</h4>
+        <ul class="space-y-4">
+          <li class="flex items-start gap-3"><i class="fas fa-envelope text-orange-500 mt-1"></i><span class="text-gray-400">shantraders2021@gmail.com</span></li>
+          <li class="flex items-start gap-3"><i class="fab fa-whatsapp text-orange-500 mt-1"></i><span class="text-gray-400">+91 70252 82000</span></li>
+          <li class="flex items-start gap-3"><i class="fas fa-map-marker-alt text-orange-500 mt-1"></i><span class="text-gray-400">Perinthaloor, Tirur-Chemravettom Road</span></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-white font-semibold text-lg mb-5">Business Hours</h4>
+        <ul class="space-y-3 text-gray-400">
+          <li class="flex justify-between"><span>Mon - Sat</span><span class="text-white font-medium">7:00 AM - 6:00 PM</span></li>
+          <li class="flex justify-between"><span>Sunday</span><span class="text-white font-medium">7:00 AM - 12:00 PM</span></li>
+        </ul>
       </div>
     </div>
+    <div class="border-t border-gray-800 mt-12 pt-8 text-center text-sm text-gray-500">
+      <p>© 2025 Shan Traders. All rights reserved. | Premium Building Materials in Perinthaloor</p>
+    </div>
   </div>
-  <div class="text-center text-sm text-gray-500 mt-10 border-t border-gray-800 pt-6">© 2025 Shan Traders. All rights reserved.</div>
 </footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
-  AOS.init();
+  AOS.init({ once: true, duration: 800 });
 
-  // Product database with images and brand details
+  // Product database (same as before)
   const productData = {
     tmt: {
       title: 'TMT Steel Bars',
-      description: 'High-strength Fe 500 & Fe 550 grade TMT bars for construction',
+      description: 'High-strength Fe 500 & Fe 550 grade TMT bars for all construction needs. Earthquake resistant and corrosion resistant.',
       brands: [
-        { name: 'Kairali TMT', logo: '🔩', image: 'https://images.unsplash.com/photo-1518709766631-a6a7f9e7f1f4?w=150&h=150&fit=crop', description: 'Premium Fe 500 TMT bars' },
-        { name: 'Kalliyath TMT', logo: '🏗️', image: 'https://images.unsplash.com/photo-1587486935156-2b3f8b6e5d9c?w=150&h=150&fit=crop', description: 'Fe 500 & Fe 550 grade' },
-        { name: 'Steelex', logo: '⚙️', image: 'https://images.unsplash.com/photo-1518709766631-a6a7f9e7f1f4?w=150&h=150&fit=crop', description: 'Corrosion resistant TMT' },
-        { name: 'Bharathi TMT', logo: '🔧', image: 'https://images.unsplash.com/photo-1587486935156-2b3f8b6e5d9c?w=150&h=150&fit=crop', description: 'Earthquake resistant' },
-        { name: 'Prince TMT', logo: '👑', image: 'https://images.unsplash.com/photo-1518709766631-a6a7f9e7f1f4?w=150&h=150&fit=crop', description: 'Superior strength bars' }
+        { name: 'Kairali TMT', logo: '🔩', image: 'tmt.jpg', description: 'Premium Fe 500 TMT bars' },
+        { name: 'Kalliyath TMT', logo: '🏗️', image: 'tmt.jpg', description: 'Fe 500 & Fe 550 grade' },
+        { name: 'Steelex', logo: '⚙️', image: 'tmt.jpg', description: 'Corrosion resistant TMT' },
+        { name: 'Bharathi TMT', logo: '🔧', image: 'tmt.jpg', description: 'Earthquake resistant' },
+        { name: 'Prince TMT', logo: '👑', image: 'tmt.jpg', description: 'Superior strength bars' }
       ]
     },
     cement: {
-      title: 'Cement',
-      description: 'Premium OPC, PPC and specialty cement for all applications',
+      title: 'Premium Cement',
+      description: 'OPC, PPC and specialty cement from India\'s most trusted brands. Suitable for all types of construction.',
       brands: [
-        { name: 'ACC Cement', logo: '🏭', image: 'https://images.unsplash.com/photo-1518709766631-a6a7f9e7f1f4?w=150&h=150&fit=crop', description: 'Trusted for decades' },
-        { name: 'Ultratech Cement', logo: '💪', image: 'https://images.unsplash.com/photo-1518709766631-a6a7f9e7f1f4?w=150&h=150&fit=crop', description: "India's No.1 cement" },
-        { name: 'Dalmia Cement', logo: '🏢', image: 'https://images.unsplash.com/photo-1518709766631-a6a7f9e7f1f4?w=150&h=150&fit=crop', description: 'Superior quality' },
-        { name: 'Chettinad Cement', logo: '🦁', image: 'https://images.unsplash.com/photo-1518709766631-a6a7f9e7f1f4?w=150&h=150&fit=crop', description: 'South Indian favorite' },
-        { name: 'JSW Cement', logo: '⭐', image: 'https://images.unsplash.com/photo-1518709766631-a6a7f9e7f1f4?w=150&h=150&fit=crop', description: 'Green cement technology' }
+        { name: 'ACC Cement', logo: '🏭', image: 'cement.jpg', description: 'Trusted for decades' },
+        { name: 'Ultratech Cement', logo: '💪', image: 'cement.jpg', description: "India's No.1 cement" },
+        { name: 'Dalmia Cement', logo: '🏢', image: 'cement.jpg', description: 'Superior quality' },
+        { name: 'Chettinad Cement', logo: '🦁', image: 'cement.jpg', description: 'South Indian favorite' },
+        { name: 'JSW Cement', logo: '⭐', image: 'cement.jpg', description: 'Green cement technology' }
       ]
     },
     pipes: {
       title: 'Pipes & Fittings',
-      description: 'PVC, CPVC & UPVC pipes for plumbing and drainage',
+      description: 'PVC, CPVC & UPVC pipes for plumbing, drainage, and agricultural use. Durable and leak-proof.',
       brands: [
-        { name: 'Demac Pipes', logo: '💧', image: 'https://images.unsplash.com/photo-1617953141903-2d7c8f5c5b1e?w=150&h=150&fit=crop', description: 'Premium PVC pipes' },
-        { name: 'Finolex', logo: '🚰', image: 'https://images.unsplash.com/photo-1617953141903-2d7c8f5c5b1e?w=150&h=150&fit=crop', description: 'Trusted brand' },
-        { name: 'Supreme', logo: '🔵', image: 'https://images.unsplash.com/photo-1617953141903-2d7c8f5c5b1e?w=150&h=150&fit=crop', description: 'Complete range' },
-        { name: 'Ashirvad', logo: '🟢', image: 'https://images.unsplash.com/photo-1617953141903-2d7c8f5c5b1e?w=150&h=150&fit=crop', description: 'CPVC specialists' }
+        { name: 'Demac Pipes', logo: '💧', image: 'pipe.jpg', description: 'Premium PVC pipes' },
+        { name: 'Finolex', logo: '🚰', image: 'pipe.jpg', description: 'Trusted brand' },
+        { name: 'Supreme', logo: '🔵', image: 'pipe.jpg', description: 'Complete range' },
+        { name: 'Ashirvad', logo: '🟢', image: 'pipe.jpg', description: 'CPVC specialists' }
       ]
     },
     sheets: {
       title: 'Sheets & Roofing',
-      description: 'GI sheets, colour coated sheets and roofing accessories',
+      description: 'GI sheets, colour coated roofing sheets, and accessories for durable and aesthetic roofing.',
       brands: [
-        { name: 'Tata Shakti', logo: '🏠', image: 'https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?w=150&h=150&fit=crop', description: 'Premium roofing' },
-        { name: 'JSW Colouron', logo: '🎨', image: 'https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?w=150&h=150&fit=crop', description: 'Colour coated sheets' },
-        { name: 'Everest', logo: '⛰️', image: 'https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?w=150&h=150&fit=crop', description: 'Fibre cement sheets' },
-        { name: 'Ramco', logo: '🏔️', image: 'https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?w=150&h=150&fit=crop', description: 'Quality roofing' }
+        { name: 'Tata Shakti', logo: '🏠', image: 'sheet.jpg', description: 'Premium roofing' },
+        { name: 'JSW Colouron', logo: '🎨', image: 'sheet.jpg', description: 'Colour coated sheets' },
+        { name: 'Everest', logo: '⛰️', image: 'sheet.jpg', description: 'Fibre cement sheets' },
+        { name: 'Ramco', logo: '🏔️', image: 'sheet.jpg', description: 'Quality roofing' }
       ]
     },
     gutters: {
       title: 'Rain Gutters',
-      description: 'PVC and metal rainwater gutter systems',
+      description: 'PVC and metal rainwater gutter systems to protect your building from water damage.',
       brands: [
-        { name: 'Finolex Gutters', logo: '🌧️', image: 'https://images.unsplash.com/photo-1534353436294-6c0e8c3b1f3e?w=150&h=150&fit=crop', description: 'PVC gutter systems' },
-        { name: 'Supreme', logo: '☔', image: 'https://images.unsplash.com/photo-1534353436294-6c0e8c3b1f3e?w=150&h=150&fit=crop', description: 'Complete range' },
-        { name: 'Astral', logo: '💦', image: 'https://images.unsplash.com/photo-1534353436294-6c0e8c3b1f3e?w=150&h=150&fit=crop', description: 'Premium quality' },
-        { name: 'Custom Made', logo: '📐', image: 'https://images.unsplash.com/photo-1534353436294-6c0e8c3b1f3e?w=150&h=150&fit=crop', description: 'Tailored solutions' }
+        { name: 'Finolex Gutters', logo: '🌧️', image: 'raingutter.png', description: 'PVC gutter systems' },
+        { name: 'Supreme', logo: '☔', image: 'raingutter.png', description: 'Complete range' },
+        { name: 'Astral', logo: '💦', image: 'raingutter.png', description: 'Premium quality' },
+        { name: 'Custom Made', logo: '📐', image: 'raingutter.png', description: 'Tailored solutions' }
       ]
     },
     hardware: {
       title: 'Hardware Items',
-      description: 'Essential hardware tools and construction accessories',
+      description: 'Essential hardware tools and construction accessories for every project.',
       brands: [
-        { name: 'Self Screw', logo: '🔩', image: 'https://images.unsplash.com/photo-1581092335871-4c7b80e83e5b?w=150&h=150&fit=crop', description: 'Various sizes available' },
-        { name: 'Silicon Sealant', logo: '🧴', image: 'https://images.unsplash.com/photo-1581092335871-4c7b80e83e5b?w=150&h=150&fit=crop', description: 'Waterproof sealants' },
-        { name: 'Cutting Blade', logo: '⚔️', image: 'https://images.unsplash.com/photo-1581092335871-4c7b80e83e5b?w=150&h=150&fit=crop', description: 'Metal & tile cutting' },
-        { name: 'Mesh (Net)', logo: '🕸️', image: 'https://images.unsplash.com/photo-1581092335871-4c7b80e83e5b?w=150&h=150&fit=crop', description: 'Construction mesh' },
-        { name: 'Nails & Bolts', logo: '📌', image: 'https://images.unsplash.com/photo-1581092335871-4c7b80e83e5b?w=150&h=150&fit=crop', description: 'All sizes available' }
+        { name: 'Self Screw', logo: '🔩', image: 'harware.png', description: 'Various sizes available' },
+        { name: 'Silicon Sealant', logo: '🧴', image: 'harware.png', description: 'Waterproof sealants' },
+        { name: 'Cutting Blade', logo: '⚔️', image: 'harware.png', description: 'Metal & tile cutting' },
+        { name: 'Mesh (Net)', logo: '🕸️', image: 'harware.png', description: 'Construction mesh' },
+        { name: 'Nails & Bolts', logo: '📌', image: 'harware.png', description: 'All sizes available' }
       ]
     },
     adhesives: {
       title: 'Tile Adhesives & Grouts',
-      description: 'Premium tile fixing solutions for walls and floors',
+      description: 'Premium tile fixing solutions for walls and floors. Strong bonding and long-lasting.',
       brands: [
-        { name: 'MYK Laticrete', logo: '🧱', image: 'https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?w=150&h=150&fit=crop', description: 'World-class adhesives' },
-        { name: 'Roff', logo: '🎯', image: 'https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?w=150&h=150&fit=crop', description: 'Professional grade' },
-        { name: 'Dr. Fixit', logo: '👨‍🔧', image: 'https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?w=150&h=150&fit=crop', description: 'Trusted waterproofing' },
-        { name: 'Weber', logo: '🏆', image: 'https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?w=150&h=150&fit=crop', description: 'Premium quality' },
-        { name: 'Bostik', logo: '🔬', image: 'https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?w=150&h=150&fit=crop', description: 'Smart adhesives' },
-        { name: 'Sika', logo: '🇨🇭', image: 'https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?w=150&h=150&fit=crop', description: 'Swiss technology' }
+        { name: 'MYK Laticrete', logo: '🧱', image: 'tile.png', description: 'World-class adhesives' },
+        { name: 'Roff', logo: '🎯', image: 'tile.png', description: 'Professional grade' },
+        { name: 'Dr. Fixit', logo: '👨‍🔧', image: 'tile.png', description: 'Trusted waterproofing' },
+        { name: 'Weber', logo: '🏆', image: 'tile.png', description: 'Premium quality' },
+        { name: 'Bostik', logo: '🔬', image: 'tile.png', description: 'Smart adhesives' },
+        { name: 'Sika', logo: '🇨🇭', image: 'tile.png', description: 'Swiss technology' }
       ]
     }
   };
 
   // Filter functionality
+  function filterCategory(category) {
+    document.querySelectorAll('.category-filter').forEach(btn => {
+      btn.classList.remove('active');
+      if (btn.dataset.category === category) btn.classList.add('active');
+    });
+    const cards = document.querySelectorAll('.category-card');
+    cards.forEach(card => {
+      if (category === 'all' || card.dataset.category === category) {
+        card.style.display = 'block';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
+
   document.querySelectorAll('.category-filter').forEach(btn => {
     btn.addEventListener('click', function() {
-      document.querySelectorAll('.category-filter').forEach(b => b.classList.remove('active'));
-      this.classList.add('active');
-      
-      const category = this.dataset.category;
-      const cards = document.querySelectorAll('.category-card');
-      
-      cards.forEach(card => {
-        if (category === 'all' || card.dataset.category === category) {
-          card.style.display = 'block';
-        } else {
-          card.style.display = 'none';
-        }
-      });
+      filterCategory(this.dataset.category);
     });
   });
 
-  // Show category detail modal
+  // Show modal
   function showCategoryDetail(category) {
     const data = productData[category];
     if (!data) return;
     
     document.getElementById('modalTitle').textContent = data.title;
     
-    let html = `
-      <p class="text-gray-600 mb-6">${data.description}</p>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-    `;
+    let html = `<p class="text-gray-600 mb-6 text-lg">${data.description}</p>`;
+    html += `<div class="grid grid-cols-1 md:grid-cols-2 gap-4">`;
     
     data.brands.forEach(brand => {
       html += `
-        <div class="brand-card p-4 border rounded-xl hover:shadow-md transition">
+        <div class="bg-gray-50 rounded-xl p-4 border border-gray-100 hover:shadow-md transition">
           <div class="flex items-center gap-4">
-            <div class="w-20 h-20 bg-gray-100 rounded-xl flex items-center justify-center overflow-hidden">
+            <div class="w-20 h-20 bg-white rounded-xl flex items-center justify-center overflow-hidden shadow-sm">
               <img src="${brand.image}" alt="${brand.name}" class="w-full h-full object-cover">
             </div>
             <div class="flex-1">
-              <h4 class="font-bold text-lg">${brand.name}</h4>
+              <div class="flex items-center gap-2 mb-1">
+                <h4 class="font-bold text-lg">${brand.name}</h4>
+                <span class="text-2xl">${brand.logo}</span>
+              </div>
               <p class="text-gray-500 text-sm">${brand.description}</p>
             </div>
-            <span class="text-3xl">${brand.logo}</span>
           </div>
         </div>
       `;
     });
     
     html += `</div>`;
-    
     document.getElementById('modalContent').innerHTML = html;
     document.getElementById('categoryModal').style.display = 'block';
     document.body.style.overflow = 'hidden';
@@ -419,18 +548,25 @@
     document.body.style.overflow = 'auto';
   }
 
-  // Close modal on outside click
   window.onclick = function(event) {
     const modal = document.getElementById('categoryModal');
-    if (event.target === modal) {
-      closeModal();
-    }
+    if (event.target === modal) closeModal();
   }
 
-  // Make category cards clickable
-  document.querySelectorAll('.category-card').forEach(card => {
-    card.style.cursor = 'pointer';
+  // Scroll to top
+  const scrollBtn = document.getElementById('scrollTop');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 400) scrollBtn.classList.add('show');
+    else scrollBtn.classList.remove('show');
   });
+  scrollBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  // Mobile menu
+  const toggleBtn = document.querySelector('[data-collapse-toggle]');
+  const mobileMenu = document.getElementById('mobile-menu');
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+  }
 </script>
 </body>
 </html>
