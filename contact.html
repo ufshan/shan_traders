@@ -3,102 +3,224 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact — Shan Traders</title>
+  <title>Contact Shan Traders | Building Materials in Perinthaloor</title>
+  <meta name="description" content="Contact Shan Traders for premium TMT steel, cement, pipes, and hardware. Visit our store on Tirur-Chemravettom Road, Perinthaloor. Call or WhatsApp +91 70252 82000.">
+  
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+    
+    body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+    
+    /* Glassmorphism */
+    .nav-blur {
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+    }
+    
+    /* Floating shapes */
+    .floating-shape {
+      position: absolute;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, rgba(230,81,0,0.12), transparent 70%);
+      filter: blur(45px);
+      z-index: -1;
+    }
+    
+    /* Logo styling */
+    .company-logo-img {
+      height: 45px;
+      width: auto;
+      max-width: 120px;
+      object-fit: contain;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.05));
+    }
+    .logo-fallback {
+      background: linear-gradient(135deg, #e65100, #bf360c);
+      color: white;
+      font-weight: bold;
+      font-size: 20px;
+      width: 45px;
+      height: 45px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 8px rgba(230,81,0,0.2);
+    }
+    
+    /* Map container */
     .map-container {
-      border-radius: 24px;
+      border-radius: 20px;
       overflow: hidden;
-      box-shadow: 0 20px 30px -10px rgba(0,0,0,0.1);
+      box-shadow: 0 20px 30px -10px rgba(0,0,0,0.15);
+      border: 2px solid rgba(255,255,255,0.2);
+    }
+    
+    /* Scroll top */
+    .scroll-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 50px;
+      height: 50px;
+      background: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s;
+      z-index: 44;
+      border: 1px solid rgba(230,81,0,0.2);
+      color: #e65100;
+    }
+    .scroll-top.show {
+      opacity: 1;
+      visibility: visible;
+    }
+    .scroll-top:hover {
+      background: #e65100;
+      color: white;
+      transform: translateY(-5px);
     }
   </style>
 </head>
-<body class="bg-gray-50">
+<body class="bg-gray-50 text-gray-800 antialiased">
 
-<!-- Navigation -->
-<nav class="bg-white/80 backdrop-blur-md fixed w-full z-50 top-0 start-0 border-b border-gray-200 shadow-sm">
+<!-- Scroll to top -->
+<div class="scroll-top" id="scrollTop">
+  <i class="fas fa-arrow-up text-xl"></i>
+</div>
+
+<!-- Navigation with Logo -->
+<nav class="nav-blur fixed w-full z-50 top-0 start-0 border-b border-gray-200/50 shadow-sm">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex justify-between items-center h-20">
-      <a href="index.html" class="flex items-center space-x-3">
-        <i class="fas fa-hard-hat text-3xl text-orange-700"></i>
-        <span class="text-2xl font-extrabold bg-gradient-to-r from-orange-700 to-orange-900 bg-clip-text text-transparent">SHAN TRADERS</span>
+      <a href="index.html" class="flex items-center space-x-3 group">
+        <img src="logo.png" alt="Shan Traders Logo" class="company-logo-img transition group-hover:scale-105" 
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="logo-fallback" style="display: none;">ST</div>
+        <div>
+          <span class="text-2xl font-extrabold bg-gradient-to-r from-orange-700 to-orange-900 bg-clip-text text-transparent">SHAN TRADERS</span>
+          <p class="text-xs text-gray-500 -mt-1 font-medium">Building Materials Supplier</p>
+        </div>
       </a>
       <div class="hidden md:flex md:items-center md:space-x-8">
-        <a href="index.html" class="text-gray-700 hover:text-orange-700 font-semibold text-lg">Home</a>
-        <a href="about.html" class="text-gray-700 hover:text-orange-700 font-semibold text-lg">About</a>
-        <a href="products.html" class="text-gray-700 hover:text-orange-700 font-semibold text-lg">Products</a>
+        <a href="index.html" class="text-gray-700 hover:text-orange-700 font-semibold text-lg transition">Home</a>
+        <a href="about.html" class="text-gray-700 hover:text-orange-700 font-semibold text-lg transition">About</a>
+        <a href="products.html" class="text-gray-700 hover:text-orange-700 font-semibold text-lg transition">Products</a>
         <a href="contact.html" class="text-gray-800 hover:text-orange-700 font-semibold text-lg border-b-2 border-orange-600 pb-1">Contact</a>
-        <a href="https://wa.me/917025282000" target="_blank" class="bg-green-500 hover:bg-green-600 text-white px-5 py-2.5 rounded-full"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+        <a href="https://wa.me/917025282000" target="_blank" class="bg-green-500 hover:bg-green-600 text-white px-5 py-2.5 rounded-full font-medium flex items-center gap-2 transition shadow-md"><i class="fab fa-whatsapp"></i> WhatsApp</a>
       </div>
+      <button data-collapse-toggle="mobile-menu" class="inline-flex md:hidden p-2 hover:bg-gray-100 rounded-lg transition">
+        <i class="fas fa-bars text-2xl"></i>
+      </button>
+    </div>
+  </div>
+  <div class="hidden md:hidden" id="mobile-menu">
+    <div class="px-4 pt-2 pb-6 space-y-3 bg-white/95 backdrop-blur-sm border-t">
+      <a href="index.html" class="block py-3 text-gray-700 text-lg">Home</a>
+      <a href="about.html" class="block py-3 text-gray-700 text-lg">About</a>
+      <a href="products.html" class="block py-3 text-gray-700 text-lg">Products</a>
+      <a href="contact.html" class="block py-3 text-orange-700 font-semibold text-lg">Contact</a>
     </div>
   </div>
 </nav>
 
-<main class="pt-28 pb-16">
-  <div class="max-w-7xl mx-auto px-4">
+<main class="pt-24 pb-16 relative">
+  <!-- Floating shapes -->
+  <div class="floating-shape w-96 h-96 -top-32 -right-32"></div>
+  <div class="floating-shape w-64 h-64 bottom-0 left-0 opacity-50"></div>
+
+  <div class="max-w-7xl mx-auto px-4 relative">
     <div class="text-center mb-12" data-aos="fade-down">
-      <h1 class="text-4xl md:text-5xl font-bold text-gray-900">Get in <span class="text-orange-700">Touch</span></h1>
-      <p class="text-xl text-gray-600 mt-3">Visit our store or contact us for inquiries</p>
+      <span class="bg-orange-100 text-orange-800 text-sm font-semibold px-5 py-2 rounded-full inline-block mb-4">We're Here to Help</span>
+      <h1 class="text-4xl md:text-6xl font-extrabold text-gray-900">Get in <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-700 to-red-700">Touch</span></h1>
+      <p class="text-xl text-gray-600 mt-4 max-w-2xl mx-auto">Visit our store or reach out — we'll respond promptly to your inquiries</p>
     </div>
 
     <div class="grid md:grid-cols-2 gap-8">
       <!-- Contact Info Card -->
       <div data-aos="fade-right">
-        <div class="bg-white p-8 rounded-3xl shadow-xl border h-full">
-          <i class="fas fa-headset text-4xl text-orange-700 mb-6"></i>
-          <h3 class="text-2xl font-bold mb-6">Contact Information</h3>
+        <div class="glass-card rounded-3xl shadow-xl p-8 md:p-10 h-full border border-white/30">
+          <div class="flex items-center gap-3 mb-8">
+            <div class="w-14 h-14 bg-gradient-to-br from-orange-500 to-orange-700 rounded-2xl flex items-center justify-center shadow-lg">
+              <i class="fas fa-headset text-2xl text-white"></i>
+            </div>
+            <h2 class="text-3xl font-bold">Contact Us</h2>
+          </div>
           
-          <div class="space-y-5">
-            <div class="flex items-center gap-4">
-              <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center text-orange-700"><i class="fas fa-envelope"></i></div>
+          <div class="space-y-6">
+            <div class="flex items-center gap-5 group">
+              <div class="w-14 h-14 bg-orange-100 rounded-2xl flex items-center justify-center text-orange-700 group-hover:bg-orange-200 transition">
+                <i class="fas fa-envelope text-xl"></i>
+              </div>
               <div>
-                <p class="text-sm text-gray-500">Email</p>
-                <a href="mailto:shantraders2021@gmail.com" class="text-lg font-medium hover:text-orange-700">shantraders2021@gmail.com</a>
+                <p class="text-sm text-gray-500">Email Address</p>
+                <a href="mailto:shantraders2021@gmail.com" class="text-lg font-semibold hover:text-orange-700 transition">shantraders2021@gmail.com</a>
               </div>
             </div>
             
-            <div class="flex items-center gap-4">
-              <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center text-green-700"><i class="fab fa-whatsapp"></i></div>
+            <div class="flex items-center gap-5 group">
+              <div class="w-14 h-14 bg-green-100 rounded-2xl flex items-center justify-center text-green-700 group-hover:bg-green-200 transition">
+                <i class="fab fa-whatsapp text-xl"></i>
+              </div>
               <div>
                 <p class="text-sm text-gray-500">WhatsApp</p>
-                <a href="https://wa.me/917025282000" class="text-lg font-medium">+91 70252 82000</a>
+                <a href="https://wa.me/917025282000" class="text-lg font-semibold hover:text-green-700 transition">+91 70252 82000</a>
               </div>
             </div>
             
-            <div class="flex items-center gap-4">
-              <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-blue-700"><i class="fas fa-phone"></i></div>
+            <div class="flex items-center gap-5 group">
+              <div class="w-14 h-14 bg-blue-100 rounded-2xl flex items-center justify-center text-blue-700 group-hover:bg-blue-200 transition">
+                <i class="fas fa-phone-alt text-xl"></i>
+              </div>
               <div>
                 <p class="text-sm text-gray-500">Phone</p>
-                <p class="text-lg font-medium">+91 70252 82000</p>
+                <a href="tel:+917025282000" class="text-lg font-semibold">+91 70252 82000</a>
               </div>
             </div>
             
-            <div class="flex items-start gap-4">
-              <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center text-orange-700"><i class="fas fa-map-marker-alt"></i></div>
+            <div class="flex items-start gap-5 group">
+              <div class="w-14 h-14 bg-orange-100 rounded-2xl flex items-center justify-center text-orange-700 group-hover:bg-orange-200 transition flex-shrink-0">
+                <i class="fas fa-map-marker-alt text-xl"></i>
+              </div>
               <div>
-                <p class="text-sm text-gray-500">Address</p>
-                <p class="text-lg font-medium">Perinthaloor, Tirur-Chemravettom Road,<br>Malappuram, Kerala</p>
+                <p class="text-sm text-gray-500">Store Address</p>
+                <p class="text-lg font-semibold">Perinthaloor, Tirur-Chemravettom Road,<br>Malappuram, Kerala</p>
               </div>
             </div>
           </div>
 
           <!-- Social Links -->
-          <div class="mt-8 pt-6 border-t">
-            <p class="text-gray-600 mb-4">Follow us on social media</p>
+          <div class="mt-10 pt-6 border-t border-gray-200">
+            <p class="text-gray-600 mb-4 font-medium">Follow us on social media</p>
             <div class="flex gap-3">
-              <a href="#" class="w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center hover:bg-blue-700 transition text-xl"><i class="fab fa-facebook-f"></i></a>
-              <a href="#" class="w-12 h-12 bg-gradient-to-br from-purple-600 to-pink-600 text-white rounded-full flex items-center justify-center hover:from-purple-700 hover:to-pink-700 transition text-xl"><i class="fab fa-instagram"></i></a>
-              <a href="#" class="w-12 h-12 bg-red-600 text-white rounded-full flex items-center justify-center hover:bg-red-700 transition text-xl"><i class="fab fa-youtube"></i></a>
-              <a href="https://wa.me/917025282000" class="w-12 h-12 bg-green-500 text-white rounded-full flex items-center justify-center hover:bg-green-600 transition text-xl"><i class="fab fa-whatsapp"></i></a>
+              <a href="#" class="w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center hover:bg-blue-700 transition shadow-md"><i class="fab fa-facebook-f text-xl"></i></a>
+              <a href="#" class="w-12 h-12 bg-gradient-to-br from-purple-600 to-pink-600 text-white rounded-full flex items-center justify-center hover:from-purple-700 hover:to-pink-700 transition shadow-md"><i class="fab fa-instagram text-xl"></i></a>
+              <a href="#" class="w-12 h-12 bg-red-600 text-white rounded-full flex items-center justify-center hover:bg-red-700 transition shadow-md"><i class="fab fa-youtube text-xl"></i></a>
+              <a href="https://wa.me/917025282000" class="w-12 h-12 bg-green-500 text-white rounded-full flex items-center justify-center hover:bg-green-600 transition shadow-md"><i class="fab fa-whatsapp text-xl"></i></a>
             </div>
           </div>
 
-          <div class="mt-6">
+          <div class="mt-8">
             <a href="https://wa.me/917025282000?text=Hello%20Shan%20Traders%2C%20I%20need%20information%20about%20building%20materials." target="_blank" 
-               class="block w-full bg-green-500 hover:bg-green-600 text-white py-4 px-6 rounded-full font-bold text-center shadow-lg transition">
+               class="block w-full bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white py-4 px-6 rounded-full font-bold text-center shadow-lg transition transform hover:-translate-y-0.5">
               <i class="fab fa-whatsapp mr-2"></i> Chat on WhatsApp
             </a>
           </div>
@@ -107,48 +229,58 @@
 
       <!-- Hours & Map Card -->
       <div data-aos="fade-left">
-        <div class="bg-gray-900 text-white p-8 rounded-3xl shadow-2xl h-full flex flex-col">
-          <i class="fas fa-clock text-3xl text-yellow-400 mb-6"></i>
-          <h3 class="text-2xl font-bold mb-6">Opening Hours</h3>
-          
-          <div class="space-y-4">
-            <div class="flex justify-between border-b border-gray-700 pb-3">
-              <span>Monday – Saturday</span>
-              <span class="font-bold text-yellow-400">7:00 AM – 6:00 PM</span>
+        <div class="bg-gradient-to-br from-gray-900 to-gray-800 text-white rounded-3xl shadow-2xl p-8 md:p-10 h-full flex flex-col relative overflow-hidden">
+          <div class="absolute -top-10 -right-10 w-32 h-32 bg-orange-500/10 rounded-full blur-3xl"></div>
+          <div class="relative">
+            <div class="flex items-center gap-3 mb-8">
+              <div class="w-14 h-14 bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-2xl flex items-center justify-center shadow-lg">
+                <i class="fas fa-clock text-2xl text-white"></i>
+              </div>
+              <h2 class="text-3xl font-bold">Store Hours</h2>
             </div>
-            <div class="flex justify-between">
-              <span>Sunday</span>
-              <span class="font-bold text-yellow-400">7:00 AM – 12:00 PM</span>
+            
+            <div class="space-y-5">
+              <div class="flex justify-between items-center border-b border-gray-700 pb-4">
+                <span class="text-lg">Monday – Saturday</span>
+                <span class="font-bold text-xl text-yellow-400">7:00 AM – 6:00 PM</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-lg">Sunday</span>
+                <span class="font-bold text-xl text-yellow-400">7:00 AM – 12:00 PM</span>
+              </div>
             </div>
-          </div>
 
-          <!-- Embedded Google Map -->
-          <div class="mt-8">
-            <p class="text-white mb-3"><i class="fas fa-map-marked-alt mr-2 text-orange-400"></i> Find us on Google Maps</p>
-            <div class="map-container">
-              <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3915.7349372784247!2d75.9246730748076!3d10.850492889286!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba7b0f5c6b5b5b5%3A0x6b0f5c6b5b5b5b5b!2sPerinthaloor!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" 
-                width="100%" 
-                height="250" 
-                style="border:0;" 
-                allowfullscreen="" 
-                loading="lazy" 
-                referrerpolicy="no-referrer-when-downgrade"
-                class="w-full">
-              </iframe>
+            <!-- Google Map -->
+            <div class="mt-8">
+              <p class="text-white mb-3 flex items-center gap-2"><i class="fas fa-map-marked-alt text-orange-400"></i> Find us on Google Maps</p>
+              <div class="map-container">
+                <iframe 
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3915.7349372784247!2d75.9246730748076!3d10.850492889286!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba7b0f5c6b5b5b5%3A0x6b0f5c6b5b5b5b5b!2sPerinthaloor!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" 
+                  width="100%" 
+                  height="250" 
+                  style="border:0;" 
+                  allowfullscreen="" 
+                  loading="lazy" 
+                  referrerpolicy="no-referrer-when-downgrade"
+                  class="w-full">
+                </iframe>
+              </div>
+              <div class="mt-3">
+                <a href="https://maps.app.goo.gl/6Vjf3weA9hSYMTLB7" target="_blank" 
+                   class="inline-flex items-center text-orange-400 hover:text-orange-300 transition font-medium">
+                  <i class="fas fa-external-link-alt mr-2"></i> Open in Google Maps
+                </a>
+              </div>
             </div>
-            <div class="mt-3">
-              <a href="https://maps.app.goo.gl/6Vjf3weA9hSYMTLB7" target="_blank" 
-                 class="inline-flex items-center text-orange-400 hover:text-orange-300 transition">
-                <i class="fas fa-external-link-alt mr-2"></i> Open in Google Maps
-              </a>
-            </div>
-          </div>
 
-          <div class="mt-auto pt-6">
-            <div class="bg-gray-800 p-4 rounded-xl flex items-start gap-3">
-              <i class="fas fa-info-circle text-orange-400 mt-1"></i>
-              <p class="text-sm text-gray-300">Free parking available. Bulk order pickup and local delivery available.</p>
+            <div class="mt-8 bg-gray-800/60 backdrop-blur-sm p-5 rounded-2xl border border-gray-700">
+              <div class="flex items-start gap-3">
+                <i class="fas fa-info-circle text-orange-400 text-xl mt-0.5"></i>
+                <div>
+                  <p class="font-semibold text-white">Free Parking Available</p>
+                  <p class="text-sm text-gray-300">Bulk order pickup and local delivery options available. Contact us for details.</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -157,41 +289,76 @@
   </div>
 </main>
 
-<!-- Footer -->
-<footer class="bg-gray-900 text-gray-300 py-10 rounded-t-3xl">
-  <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8">
-    <div>
-      <div class="flex items-center gap-2 text-white text-xl font-bold"><i class="fas fa-hard-hat"></i> SHAN TRADERS</div>
-      <p class="mt-2 text-sm">Building materials supplier since 2021</p>
-    </div>
-    <div>
-      <h4 class="text-white font-semibold mb-3">Quick Links</h4>
-      <ul class="space-y-2">
-        <li><a href="index.html" class="hover:text-white">Home</a></li>
-        <li><a href="about.html" class="hover:text-white">About</a></li>
-        <li><a href="products.html" class="hover:text-white">Products</a></li>
-        <li><a href="contact.html" class="hover:text-white">Contact</a></li>
-      </ul>
-    </div>
-    <div>
-      <h4 class="text-white font-semibold mb-3">Contact</h4>
-      <p><i class="fas fa-envelope mr-2"></i> shantraders2021@gmail.com</p>
-      <p class="mt-2"><i class="fab fa-whatsapp mr-2"></i> +91 70252 82000</p>
-    </div>
-    <div>
-      <h4 class="text-white font-semibold mb-3">Follow Us</h4>
-      <div class="flex space-x-3">
-        <a href="#" class="w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center hover:bg-blue-700"><i class="fab fa-facebook-f"></i></a>
-        <a href="#" class="w-10 h-10 bg-gradient-to-br from-purple-600 to-pink-600 text-white rounded-full flex items-center justify-center hover:from-purple-700 hover:to-pink-700"><i class="fab fa-instagram"></i></a>
-        <a href="#" class="w-10 h-10 bg-red-600 text-white rounded-full flex items-center justify-center hover:bg-red-700"><i class="fab fa-youtube"></i></a>
+<!-- Enhanced Footer -->
+<footer class="bg-gray-900 text-gray-300 pt-16 pb-8 rounded-t-[40px] mt-10">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
+      <div>
+        <div class="flex items-center gap-3 mb-4">
+          <img src="images/logo.png" alt="Shan Traders Logo" class="h-10 w-auto max-w-[100px] object-contain brightness-0 invert" 
+               onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="w-10 h-10 bg-gradient-to-br from-orange-600 to-orange-800 rounded-lg items-center justify-center" style="display: none;">
+            <span class="text-white font-bold">ST</span>
+          </div>
+          <span class="text-white text-2xl font-bold">SHAN TRADERS</span>
+        </div>
+        <p class="text-sm text-gray-400 leading-relaxed">Quality building materials since 2021. Premium products at competitive prices.</p>
+        <div class="flex space-x-4 mt-6">
+          <a href="#" class="w-10 h-10 bg-gray-800 hover:bg-blue-600 rounded-full flex items-center justify-center transition"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="w-10 h-10 bg-gray-800 hover:bg-gradient-to-br from-purple-600 to-pink-600 rounded-full flex items-center justify-center transition"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="w-10 h-10 bg-gray-800 hover:bg-red-600 rounded-full flex items-center justify-center transition"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+      <div>
+        <h4 class="text-white font-semibold text-lg mb-5">Quick Links</h4>
+        <ul class="space-y-3">
+          <li><a href="index.html" class="text-gray-400 hover:text-white transition flex items-center gap-2"><i class="fas fa-chevron-right text-xs text-orange-500"></i> Home</a></li>
+          <li><a href="about.html" class="text-gray-400 hover:text-white transition flex items-center gap-2"><i class="fas fa-chevron-right text-xs text-orange-500"></i> About Us</a></li>
+          <li><a href="products.html" class="text-gray-400 hover:text-white transition flex items-center gap-2"><i class="fas fa-chevron-right text-xs text-orange-500"></i> Products</a></li>
+          <li><a href="contact.html" class="text-gray-400 hover:text-white transition flex items-center gap-2"><i class="fas fa-chevron-right text-xs text-orange-500"></i> Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-white font-semibold text-lg mb-5">Contact Info</h4>
+        <ul class="space-y-4">
+          <li class="flex items-start gap-3"><i class="fas fa-envelope text-orange-500 mt-1"></i><span class="text-gray-400">shantraders2021@gmail.com</span></li>
+          <li class="flex items-start gap-3"><i class="fab fa-whatsapp text-orange-500 mt-1"></i><span class="text-gray-400">+91 70252 82000</span></li>
+          <li class="flex items-start gap-3"><i class="fas fa-map-marker-alt text-orange-500 mt-1"></i><span class="text-gray-400">Perinthaloor, Tirur-Chemravettom Road</span></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-white font-semibold text-lg mb-5">Business Hours</h4>
+        <ul class="space-y-3 text-gray-400">
+          <li class="flex justify-between"><span>Mon - Sat</span><span class="text-white font-medium">7:00 AM - 6:00 PM</span></li>
+          <li class="flex justify-between"><span>Sunday</span><span class="text-white font-medium">7:00 AM - 12:00 PM</span></li>
+        </ul>
       </div>
     </div>
+    <div class="border-t border-gray-800 mt-12 pt-8 text-center text-sm text-gray-500">
+      <p>© 2025 Shan Traders. All rights reserved. | Serving Perinthaloor, Tirur, and Malappuram</p>
+    </div>
   </div>
-  <div class="text-center text-sm text-gray-500 mt-10 border-t border-gray-800 pt-6">© 2025 Shan Traders. All rights reserved.</div>
 </footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script>AOS.init();</script>
+<script>
+  AOS.init({ once: true, duration: 800 });
+  
+  // Scroll to top
+  const scrollBtn = document.getElementById('scrollTop');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 400) scrollBtn.classList.add('show');
+    else scrollBtn.classList.remove('show');
+  });
+  scrollBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+  
+  // Mobile menu toggle
+  const toggleBtn = document.querySelector('[data-collapse-toggle]');
+  const mobileMenu = document.getElementById('mobile-menu');
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+  }
+</script>
 </body>
 </html>
